@@ -1,0 +1,4 @@
+<% hover_classes = "hover:!border-black hover:shadow-navlink hover:!bg-white hover:-translate-x-1 hover:-translate-y-1" %>
+<% selected_classes = is_selected ? "bg-white border-black group-hover:bg-transparent group-hover:border-transparent" : "border-transparent" %>
+<%= link_to title, path, class: "p-2 border rounded-3xl px-4 inline-block duration-100 #{hover_classes} #{selected_classes} " %>
+

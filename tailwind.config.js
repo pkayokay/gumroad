@@ -4,6 +4,9 @@ module.exports = {
       colors: {
         body: '#f4f4f0',
       },
+      boxShadow: {
+        'navlink': '4px 4px 0px 1px rgba(0,0,0,1)',
+      }
     },
   },
   content: [

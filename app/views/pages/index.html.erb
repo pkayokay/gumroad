@@ -1,5 +1,15 @@
-<header class="px-7 py-5 border-b border-black w-full">
-  <h1 class="text-4xl font-semibold">GUMROAD</h1>
+<header class="px-7 py-7 border-b border-black w-full">
+  <h1 class="text-4xl font-semibold">
+    <%= link_to "GUMROAD", root_path %>
+  </h1>
+  <div class="mt-5 group">
+    <%= render "nav_link", path: root_path, title: "All", is_selected: params[:category].blank? %>
+    <%= render "nav_link", path: root_path(category: "3D"), title: "3D", is_selected: params[:category] == "3d" %>
+    <%= render "nav_link", path: root_path(category: "Audio"), title: "Audio", is_selected: params[:category] == "audio" %>
+  </div>
+  <% if params[:category].present? %>
+    <h2 class="mt-4 text-2xl"><%= params[:category] %></h2>
+  <% end %>
 </header>
 
 <section class="px-7 py-5 h-[calc(100vh-185px)]">

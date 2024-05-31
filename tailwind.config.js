@@ -2,6 +2,13 @@ module.exports = {
   corePlugins: {
     preflight: false,
   },
+  theme: {
+    extend: {
+      colors: {
+        body: '#f4f4f0',
+      },
+    },
+  },
   content: [
     './app/views/**/*.html.erb',
     './app/helpers/**/*.rb',

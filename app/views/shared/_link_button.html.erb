@@ -1,0 +1,6 @@
+<% shared_classes = "border border-black py-4 px-5 rounded-md duration-100 hover:shadow-linkButton inline-block hover:-translate-x-1 hover:-translate-y-1" %>
+<% if variant == "black" %>
+  <%= link_to title, path, class: "bg-black text-white #{shared_classes} hover:bg-pink hover:text-black" %>
+<% elsif variant == "outline" %>
+  <%= link_to title, path, class: "text-black #{shared_classes}" %>
+<% end %>

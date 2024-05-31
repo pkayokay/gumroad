@@ -1,11 +1,21 @@
 <header class="px-7 py-7 border-b border-black w-full">
-  <h1 class="text-4xl font-semibold">
-    <%= link_to "GUMROAD", root_path %>
-  </h1>
-  <div class="mt-5 group">
+  <div class="flex w-full justify-between items-center">
+    <h1 class="text-4xl font-semibold">
+      <%= link_to "GUMROAD", root_path %>
+    </h1>
+    <div class="space-x-3">
+      <!--If logged in-->
+      <%#= render "shared/link_button", title: "Library", path: "#", variant: "outline" %>
+      <!--else-->
+      <%= render "shared/link_button", title: "Login", path: "#", variant: "outline" %>
+      <!--end-->
+      <%= render "shared/link_button", title: "Start selling", path: "#", variant: "black" %>
+    </div>
+  </div>
+  <div class="mt-5 group inline-block">
     <%= render "nav_link", path: root_path, title: "All", is_selected: params[:category].blank? %>
-    <%= render "nav_link", path: root_path(category: "3D"), title: "3D", is_selected: params[:category] == "3d" %>
-    <%= render "nav_link", path: root_path(category: "Audio"), title: "Audio", is_selected: params[:category] == "audio" %>
+    <%= render "nav_link", path: root_path(category: "3D"), title: "3D", is_selected: params[:category] == "3D" %>
+    <%= render "nav_link", path: root_path(category: "Audio"), title: "Audio", is_selected: params[:category] == "Audio" %>
   </div>
   <% if params[:category].present? %>
     <h2 class="mt-4 text-2xl"><%= params[:category] %></h2>

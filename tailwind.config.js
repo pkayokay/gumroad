@@ -3,9 +3,11 @@ module.exports = {
     extend: {
       colors: {
         body: '#f4f4f0',
+        pink: '#ff90e8',
       },
       boxShadow: {
         'navlink': '4px 4px 0px 1px rgba(0,0,0,1)',
+        'linkButton': '4px 4px 0px 1px rgba(0,0,0,1)',
       }
     },
   },

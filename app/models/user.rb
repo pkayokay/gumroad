@@ -13,4 +13,12 @@ class User < ApplicationRecord
   def autoset_username
     self.username = SecureRandom.alphanumeric(10)
   end
+
+  def display_name
+    name.presence || email
+  end
+
+  def initials
+    display_name.first.capitalize
+  end
 end

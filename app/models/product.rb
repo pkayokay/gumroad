@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   validates :price, numericality: { greater_than: -1 }
   belongs_to :user
 
+  scope :published, -> { where(is_published: true) }
+
   before_validation :autoset_slug, on: :create
 
   def autoset_slug

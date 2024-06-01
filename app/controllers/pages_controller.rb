@@ -7,5 +7,7 @@ class PagesController < ApplicationController
   def profile
     @user = User.find_by(username: params[:username])
     redirect_to root_path if @user.nil?
+
+    @products = @user.products.published
   end
 end

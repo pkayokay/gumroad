@@ -10,7 +10,7 @@ class RegistrationsController < ApplicationController
     @user = User.new(registration_params)
     if @user.save
       sign_in(@user)
-      redirect_to admin_path
+      redirect_to admin_path, notice: "Thanks for signing up, welcome!"
     else
       render :new, status: :unprocessable_entity
     end

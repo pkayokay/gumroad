@@ -1,8 +1,8 @@
-<% shared_classes = "text-white py-6 block px-12 hover:text-pink duration-100 border-t border-t-neutral-500" %>
+<% shared_classes = "text-white py-5 block px-14 hover:text-pink duration-100 border-t border-t-neutral-500" %>
 <% last_child_classses = "#{shared_classes} border-b border-b-neutral-500" %>
-<nav class="bg-black h-[100vh] overflow-y-scroll">
+<nav class="bg-black h-[100vh] overflow-y-scroll flex flex-col">
   <h1><%= link_to "Gumroad", admin_path, class: "text-white font-medium uppercase text-3xl my-10 py-5 text-center block" %></h1>
-  <div class="space-y-16">
+  <div class="space-y-16 flex-1">
     <ul class="">
       <li><%= link_to "Home", admin_path, class: shared_classes %></li>
       <li><%= link_to "Products", "#", class: shared_classes %></li>
@@ -19,10 +19,10 @@
       <li><%= link_to "Library", "#", class: shared_classes %></li>
       <li><%= link_to "Start selling", "#", class: last_child_classses %></li>
     </ul>
-    <ul class="">
-      <li><%= link_to "Help", "#", class: shared_classes %></li>
-      <li><%= link_to "Setings", "#", class: shared_classes %></li>
-      <li><%= link_to "Paul Kim", "#", class: shared_classes %></li>
-    </ul>
   </div>
+  <ul class="mt-16">
+    <li><%= link_to "Help", "#", class: shared_classes %></li>
+    <li><%= link_to "Setings", "#", class: shared_classes %></li>
+    <li><%= link_to "Paul Kim", "#", class: shared_classes %></li>
+  </ul>
 </nav>

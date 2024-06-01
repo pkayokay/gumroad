@@ -1,17 +1,19 @@
 
-<% if user_signed_in? && current_user == @product.user %>
-  <%= link_to "Edit", edit_product_path(@product), class: "px-5 py-6 block" %>
-<% end %>
+<div class="p-10">
+  <% if user_signed_in? && current_user == @product.user %>
+    <%= render "shared/link_button", title: "Edit", path: edit_product_path(@product), variant: "outline" %>
+  <% end %>
 
-<div><%= @product.name %></div><br>
-<div><%= @product.price %></div><br>
-<div>Ratings</div><br>
-<div class="textarea">
-  <%= simple_format(@product.description) %>
+  <div><%= @product.name %></div><br>
+  <div><%= @product.price %></div><br>
+  <div>Ratings</div><br>
+  <div class="textarea">
+    <%= simple_format(@product.description) %>
+  </div>
+  <% if @product.is_published? %>
+    <p>Buy Now</p>
+  <% else %>
+    <p>This product is not currently for sale.</p>
+  <% end %>
+  <%= link_to "Download \"#{@product.name}\"", root_path + 'gumroad.pdf', target: "_blank", download: @product.name, class: "bg-black text-white"  %>
 </div>
-<% if @product.is_published? %>
-  <p>Buy Now</p>
-<% else %>
-  <p>This product is not currently for sale.</p>
-<% end %>
-<%= link_to "Download \"#{@product.name}\"", root_path + 'gumroad.pdf', target: "_blank", download: @product.name, class: "bg-black text-white"  %>

@@ -15,12 +15,12 @@
   </head>
 
   <% if is_consumer_side? %>
-    <body class="bg-body">
+    <body class="<%= bg_color %>">
       <%= yield %>
     </body>
   <% else %>
     <% if user_signed_in? %>
-      <body class="bg-body flex item-start">
+      <body class="flex item-start <%= bg_color %>">
         <%= render "shared/flash" %>
         <%= render "shared/sidenav" %>
         <main class="flex-1 min-w-[1000px] overflow-y-scroll h-screen">
@@ -28,7 +28,7 @@
         </main>
       </body>
     <% else %>
-      <body class="bg-body p-5">
+      <body class="p-5 <%= bg_color %>">
         <main class="max-w-md mx-auto w-full p-5">
           <%= render "shared/flash" %>
           <h1><%= link_to "Gumroad", admin_path, class: "font-medium uppercase text-3xl my-8 py-5 text-center block" %></h1>

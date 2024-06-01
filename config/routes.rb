@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'pages#index'
   scope path: 'app' do
     get "/", to: "admin#dashboard", as: :admin
+    get "/products", to: "products#index"
   end
 
   get "sign_in", to: "sessions#new"

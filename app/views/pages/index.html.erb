@@ -5,11 +5,13 @@
     </h1>
     <div class="space-x-3">
       <!--If logged in-->
-      <%#= render "shared/link_button", title: "Library", path: "#", variant: "outline" %>
-      <!--else-->
-      <%= render "shared/link_button", title: "Login", path: admin_path, variant: "outline" %>
-      <!--end-->
-      <%= render "shared/link_button", title: "Start selling", path: "#", variant: "black" %>
+      <% if user_signed_in? %>
+        <%= render "shared/link_button", title: "Library", path: admin_path, variant: "outline" %>
+        <%= render "shared/link_button", title: "Start selling", path: admin_path, variant: "black" %>
+      <% else %>
+        <%= render "shared/link_button", title: "Login", path: sign_in_path, variant: "outline" %>
+        <%= render "shared/link_button", title: "Start selling", path: sign_up_path, variant: "black" %>
+      <% end %>
     </div>
   </div>
   <div class="mt-5 group inline-block">

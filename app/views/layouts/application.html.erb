@@ -19,11 +19,23 @@
       <%= yield %>
     </body>
   <% else %>
-    <body class="bg-body flex item-start">
-      <%= render "shared/sidenav" %>
-      <main class="flex-1">
-        <%= yield %>
-      </main>
-    </body>
+    <% if user_signed_in? %>
+      <body class="bg-body flex item-start">
+        <%= render "shared/flash" %>
+        <%= render "shared/sidenav" %>
+        <main class="flex-1">
+          <%= yield %>
+        </main>
+      </body>
+    <% else %>
+      <body class="bg-body p-5">
+        <main class="max-w-md mx-auto w-full p-5">
+          <%= render "shared/flash" %>
+          <h1><%= link_to "Gumroad", admin_path, class: "font-medium uppercase text-3xl my-8 py-5 text-center block" %></h1>
+          <div><%= flash[:notice] || flash[:alert] %></div>
+          <%= yield %>
+        </main>
+      </body>
+    <% end %>
   <% end %>
 </html>

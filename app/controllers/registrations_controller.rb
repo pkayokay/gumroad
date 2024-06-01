@@ -1,4 +1,7 @@
 class RegistrationsController < ApplicationController
+  skip_before_action :authenticate_user!
+  before_action :require_no_user!
+
   def new
     @user = User.new
   end
@@ -7,7 +10,7 @@ class RegistrationsController < ApplicationController
     @user = User.new(registration_params)
     if @user.save
       sign_in(@user)
-      redirect_to root_path
+      redirect_to admin_path
     else
       render :new, status: :unprocessable_entity
     end

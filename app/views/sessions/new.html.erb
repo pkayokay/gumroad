@@ -1,0 +1,15 @@
+<h1 class="text-4xl mb-8">Log in</h1>
+<%= form_with model: @user, url: sign_in_path do |form| %>
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+  <br>
+  <%= render "shared/form_submit_button", form: form, title: "Log in" %>
+  <%= link_to "Don't have an account? Sign up instead.", sign_up_path %>
+<% end %>

@@ -4,14 +4,15 @@
   <h1><%= link_to "Gumroad", admin_path, class: "text-white font-medium uppercase text-3xl my-8 py-5 text-center block" %></h1>
   <div class="space-y-16 flex-1">
     <ul class="">
-      <li><%= link_to "Home", admin_path, class: shared_classes + " #{'text-pink' if request.path == admin_path}" %></li>
-      <li><%= link_to "Products", products_path, class: shared_classes + " #{'text-pink' if request.path == products_path}" %></li>
+      <li><%= link_to "Home", admin_path, class: shared_classes + " #{'!text-pink' if request.path == admin_path}" %></li>
+      <li><%= link_to "Products", products_path, class: shared_classes + " #{'!text-pink' if request.path == products_path}" %></li>
       <!--<li><%#= link_to "Collaborators", "#", class: shared_classes %></li>-->
       <!--<li><%#= link_to "Checkout", "#", class: shared_classes %></li>-->
       <li><%= link_to "Emails", "#", class: shared_classes %></li>
+      <li><%= link_to "Followers", followers_path, class: last_child_classses %></li>
       <!--<li><%#= link_to "Workflows", "#", class: shared_classes %></li>-->
-      <li><%= link_to "Sales", "#", class: shared_classes %></li>
-      <li><%= link_to "Analytics", "#", class: last_child_classses %></li>
+      <!--<li><%#= link_to "Sales", "#", class: shared_classes %></li>-->
+      <!--<li><%#= link_to "Analytics", "#", class: last_child_classses %></li>-->
       <!--<li><%#= link_to "Payouts", "#", class: last_child_classses %></li>-->
     </ul>
     <ul class="">
@@ -21,7 +22,7 @@
   </div>
   <ul class="mt-16">
     <li><%= link_to "Help", "https://help.gumroad.com/", class: shared_classes, target: "_blank" %></li>
-    <li><%= link_to "Setings", settings_path, class: shared_classes %></li>
+    <li><%= link_to "Setings", settings_path, class: shared_classes + " #{'!text-pink' if request.path == settings_path}" %></li>
     <li class="text-left">
       <%= button_to sign_out_path, method: :delete, class: "text-left", form: {class: shared_classes }, data: { turbo: false } do %>
       <span><%= current_user.email %></p>

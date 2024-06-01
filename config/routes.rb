@@ -3,12 +3,14 @@ Rails.application.routes.draw do
 
   root 'pages#index'
 
+  post '/subscribe', to: "pages#subscribe"
   get "/profile/:username", to: "pages#profile", as: :profile
   get "/profile/:username/p/:product_slug", to: "pages#product", as: :product_page
 
   scope path: 'app' do
     get "/", to: "admin#dashboard", as: :admin
     get "/products", to: "products#index"
+    get "/followers", to: "followers#index"
     get "/settings", to: "settings#index"
     patch "/update_settings", to: "settings#update"
   end

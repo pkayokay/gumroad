@@ -16,6 +16,7 @@
 
   <% if is_consumer_side? %>
     <body class="<%= bg_color %>">
+      <%= render "shared/flash" %>
       <%= yield %>
     </body>
   <% else %>

@@ -1,7 +1,2 @@
-<%= render "admin/header", title: "What are you creating?" do %>
-  <div class="ml-4 space-x-3">
-    <%= render "shared/link_button", title: "Back to Products", path: products_path, variant: "outline" %>
-  </div>
-<% end %>
-
+<%= render "admin/header", title: "What are you creating?", link_info: { path: products_path, title: "Back to Products", variant: "outline"} %>
 <%= render "form", action_url: create_products_path, submit_title: "Create Product" %>

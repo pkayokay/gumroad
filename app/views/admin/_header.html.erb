@@ -1,7 +1,7 @@
 <header class="min-h-[10rem] px-12 py-10 border-b w-full border-b-black flex items-center justify-between w-full">
   <h1 class="text-4xl"><%= title %></h1>
   <% if local_assigns[:link_info] %>
-    <%= render "shared/link_button", title: local_assigns[:link_info][:title], path: local_assigns[:link_info][:path], variant: "pink" %>
+    <%= render "shared/link_button", title: local_assigns[:link_info][:title], path: local_assigns[:link_info][:path], variant: local_assigns[:link_info][:variant] %>
   <% end %>
   <%= yield %>
 </header>

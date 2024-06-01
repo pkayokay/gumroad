@@ -8,7 +8,7 @@
           <div class="inline-block min-w-full align-middle">
             <table class="min-w-full divide-y divide-gray-300">
               <thead class="">
-                <tr>
+                <tr class="">
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Sales</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Revenue</th>
@@ -33,7 +33,15 @@
                     $<%= product.price %>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4">
-                    <span><%= product.is_published ? "Published" : "Unpublished" %></span>
+                    <div class="flex items-center space-x-2">
+                      <% if product.is_published %>
+                        <span class="inline-block h-4 w-4 rounded-full bg-black"></span>
+                        <span>Published</span>
+                      <% else %>
+                        <span class="inline-block h-4 w-4 rounded-full bg-transparent border border-black"></span>
+                        <span>Unpublished</span>
+                      <% end %>
+                    </div>
                   </td>
                 </tr>
               <% end %>

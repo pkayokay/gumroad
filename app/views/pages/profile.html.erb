@@ -1,20 +1,41 @@
-<%= @user.initials %>
-<h1><%= @user.display_name %></h1>
-<h2>Products</h2>
-<h2>Posts</h2>
-<h2>Bio</h2>
-<h2>Subscribe</h2>
-<div class="p-12">
-  <% if @products.present? %>
-    <div class="border border-black rounded-md">
-      <% @products.each do |product| %>
-        <%= link_to product.name, product_page_path(username: @user.username, product_slug: product.slug), class: "px-5 py-6 block" %>
+<div class="mt-10 pb-10 border-b border-black px-5">
+  <div class="max-w-4xl w-full mx-auto flex items-center justify-between flex-col md:flex-row space-y-3 md:space-y-0">
+    <h1 class="text-2xl"><%= @user.display_name %></h1>
+    <%= form_with model: @follower, url: subscribe_path(username: @user.username), method: :post, class: "flex items-center space-x-3" do |form| %>
+      <div>
+        <%= form.email_field :email, placeholder: "Email address", required: true %>
+      </div>
+      <div class="-mb-6">
+        <%= render "shared/form_submit_button", form: form, title: "Subscribe" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="mt-10 pb-10 border-b border-black px-5">
+  <div class="max-w-4xl mx-auto flex items-center justify-between w-full">
+    <div class="w-full">
+      <h2 class="text-2xl">Products</h2>
+      <% if @products.present? %>
+        <div class="border border-black rounded-md">
+          <% @products.each do |product| %>
+            <%= link_to product.name, product_page_path(username: @user.username, product_slug: product.slug), class: "px-5 py-6 block" %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="text-center">
+          <p class="text-lg w-full mt-10 mb-10 text-center">You don't have any products</p>
+        </div>
       <% end %>
     </div>
-  <% else %>
-    <p class="text-lg w-full mt-24 text-center px-5">You don't have any products</p>
-  <% end %>
+  </div>
 </div>
-<div class="text-center mt-5">
+<div class="mt-10 pb-10 border-b border-black px-5">
+  <div class="max-w-4xl mx-auto flex items-center justify-between w-full">
+    <div class="w-full">
+      <h2 class="text-2xl">Posts</h2>
+    </div>
+  </div>
+</div>
+<div class="text-center mt-10">
   <p>Powered by <span class="font-semibold uppercase">Gumroad</span></p>
 </div>

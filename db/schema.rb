@@ -15,7 +15,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_173250) do
   enable_extension "plpgsql"
 
   create_table "followers", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.string "email", null: false
+    t.bigint "user_id"
     t.bigint "target_user_id", null: false
     t.boolean "is_unsubscribed", default: false, null: false
     t.datetime "created_at", null: false

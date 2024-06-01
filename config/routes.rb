@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'pages#index'
 
+  post '/subscribe', to: "pages#subscribe"
   get "/profile/:username", to: "pages#profile", as: :profile
   get "/profile/:username/p/:product_slug", to: "pages#product", as: :product_page
 

@@ -3,9 +3,16 @@
 <div class="p-12">
   <% if @products.present? %>
     <div class="border border-black rounded-md">
+      Name	Sales	Revenue	Price	Status
       <% @products.each do |product| %>
-        <%= link_to product.name, edit_product_path(product), class: "px-5 py-6 block" %>
+        <%= link_to edit_product_path(product), class: "px-5 py-6 block" do %>
+         <span><%= product.name %></span>
+         <span>$0</span>
+         <span>$<%= product.price %></span>
+         <span><%= product.is_published ? "Published" : "Unpublished" %></span>
+        <% end %>
       <% end %>
+      Totals
     </div>
   <% else %>
     <p class="text-lg w-full mt-24 text-center px-5">You don't have any products</p>

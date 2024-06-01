@@ -1,0 +1,20 @@
+<%= @user.initials %>
+<h1><%= @user.display_name %></h1>
+<h2>Products</h2>
+<h2>Posts</h2>
+<h2>Bio</h2>
+<h2>Subscribe</h2>
+<div class="p-12">
+  <% if @products.present? %>
+    <div class="border border-black rounded-md">
+      <% @products.each do |product| %>
+        <%= link_to product.name, product_page_path(username: @user.username, product_slug: product.slug), class: "px-5 py-6 block" %>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-lg w-full mt-24 text-center px-5">You don't have any products</p>
+  <% end %>
+</div>
+<div class="text-center mt-5">
+  <p>Powered by <span class="font-semibold uppercase">Gumroad</span></p>
+</div>

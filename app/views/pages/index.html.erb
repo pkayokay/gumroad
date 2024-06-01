@@ -7,7 +7,7 @@
       <!--If logged in-->
       <% if user_signed_in? %>
         <%= render "shared/link_button", title: "Library", path: admin_path, variant: "outline" %>
-        <%= render "shared/link_button", title: "Start selling", path: admin_path, variant: "black" %>
+        <%= render "shared/link_button", title: "Start selling", path: products_path, variant: "black" %>
       <% else %>
         <%= render "shared/link_button", title: "Login", path: sign_in_path, variant: "outline" %>
         <%= render "shared/link_button", title: "Start selling", path: sign_up_path, variant: "black" %>

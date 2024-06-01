@@ -1,0 +1,48 @@
+
+<div class="p-10">
+  <% if user_signed_in? && current_user == @product.user %>
+    <div class="mb-5">
+      <%= render "shared/link_button", title: "Edit", path: edit_product_path(@product), variant: "outline" %>
+    </div>
+  <% end %>
+
+  <div class="mt-2 border border-black rounded-md w-full max-w-4xl mx-auto">
+    <div class="p-6 border-b border-b-black">
+      <h1 class="text-4xl"><%= @product.name %></h1>
+    </div>
+    <div class="flex md:flex-row flex-col">
+      <div id="left" class="">
+        <div class="border-b border-black flex items-center md:flex-row flex-col">
+          <div class="w-full md:w-auto p-6 md:border-b-0 border-b md:border-r border-black text-center">
+            <span class="bg-pink text-black border border-black rounded-md p-3">$<%= @product.price %></span>
+          </div>
+          <div class="w-full md:w-auto p-6 md:border-b-0 border-b md:border-r border-black text-center">
+            <%= link_to profile_path(@product.user.username), class: "underline", target: "_blank" do %>
+              <%= @product.user.display_name %>
+            <% end %>
+          </div>
+          <div class="p-6">
+            0 ratings
+          </div>
+        </div>
+        <div class="textarea p-6">
+          <%= simple_format(@product.description) %>
+        </div>
+      </div>
+      <div id="right" class="md:w-[500px] md:border-t-0 border-t md:border-l border-black p-6">
+        <div class="">
+          <% if @product.is_published? %>
+            <p>Buy Now</p>
+          <% else %>
+            <div class="rounded-md mb-4 p-4 bg-yellow-50 border border-yellow-500">This product is not currently for sale.</div>
+          <% end %>
+            <%#= link_to "Download \"#{@product.name}\"", root_path + 'gumroad.pdf', target: "_blank", download: @product.name, class: "bg-black text-white"  %>
+        </div>
+        <div>Ratings</div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center mt-5">
+    <p>Powered by <span class="font-semibold uppercase">Gumroad</span></p>
+  </div>
+</div>

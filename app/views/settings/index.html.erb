@@ -1,0 +1,21 @@
+<%= render "admin/header", title: "Settings" %>
+
+<div class="p-12 max-w-2xl">
+  <%= form_with model: current_user, url: update_settings_path, method: :patch do |form| %>
+    <%= render "shared/form_errors", form: form %>
+    <div>
+      <%= form.label :username %>
+      <%= form.text_field :username %>
+    </div>
+    <div class="mt-1">
+      <span>View your profile at: </span><%= link_to profile_url(current_user.username), profile_url(current_user.username), class: "underline", target: "_blank" %>
+    </div>
+    <br>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+    <br>
+    <%= render "shared/form_submit_button", form: form, title: "Save changes" %>
+  <% end %>
+</div>

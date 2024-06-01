@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   get "/profile/:username", to: "pages#profile", as: :profile
+  get "/profile/:username/p/:product_slug", to: "pages#product", as: :product_page
 
   scope path: 'app' do
     get "/", to: "admin#dashboard", as: :admin

@@ -1,4 +1,9 @@
 <div class="p-10 max-w-2xl">
+  <% if @product.persisted? %>
+    <div class="mb-6">
+      <span>View Product at: </span><%= link_to product_page_url(username: current_user.username, product_slug: @product.slug), product_page_url(username: current_user.username, product_slug: @product.slug), class: "underline", target: "_blank" %>
+    </div>
+  <% end %>
   <%= form_with model: @product, url: action_url do |form| %>
     <%= render "shared/form_errors", form: form %>
     <div>

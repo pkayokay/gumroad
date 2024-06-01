@@ -1,6 +1,6 @@
 <%= render "admin/header", title: "Settings" %>
 
-<div class="p-12">
+<div class="p-12 max-w-2xl">
   <%= form_with model: current_user, url: update_settings_path, method: :patch do |form| %>
     <%= render "shared/form_errors", form: form %>
     <div>

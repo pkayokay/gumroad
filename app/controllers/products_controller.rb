@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:edit, :update]
+  before_action :set_product, only: [:edit, :update, :destroy]
 
   def index
     @products = current_user.products
@@ -26,6 +26,14 @@ class ProductsController < ApplicationController
       redirect_to products_path, notice: "Product added!"
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @product.destroy
+      redirect_to products_path, notice: "Product was deleted."
+    else
+      redirect_to edit_product_path(@product), alert: "Product was not deleted. Please try again."
     end
   end
 

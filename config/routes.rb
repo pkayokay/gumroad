@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     patch "/update_settings", to: "settings#update"
   end
 
-  resources :products, only: [:new, :edit, :update] do
+  resources :products, only: [:new, :edit, :update, :destroy] do
     collection do
       post "/", to: "products#create", as: :create
     end

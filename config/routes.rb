@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post '/subscribe', to: "pages#subscribe"
   get "/profile/:username", to: "pages#profile", as: :profile
   get "/profile/:username/p/:product_slug", to: "pages#product", as: :product_page
+  get "/profile/:username/p/:product_slug/checkout", to: "pages#product_checkout", as: :product_checkout
 
   scope path: 'app' do
     get "/", to: "admin#dashboard", as: :admin

@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  before_action :set_product, only: [:product, :product_checkout]
   skip_before_action :authenticate_user!
 
   def index
@@ -28,6 +29,13 @@ class PagesController < ApplicationController
   end
 
   def product
+  end
+
+  def product_checkout
+    redirect_to root_path if @user == current_user
+  end
+
+  def set_product
     @user = User.find_by(username: params[:username])
     redirect_to root_path if @user.nil?
 

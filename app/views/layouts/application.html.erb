@@ -19,9 +19,11 @@
       <%= yield %>
     </body>
   <% else %>
-    <body class="bg-body flex">
+    <body class="bg-body flex item-start">
       <%= render "shared/sidenav" %>
-      <%= yield %>
+      <main class="flex-1">
+        <%= yield %>
+      </main>
     </body>
   <% end %>
 </html>

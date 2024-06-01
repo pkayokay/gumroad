@@ -14,11 +14,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
   </head>
 
-  <body class="bg-body">
-    <% if is_consumer_side? %>
+  <% if is_consumer_side? %>
+    <body class="bg-body">
       <%= yield %>
-    <% else %>
+    </body>
+  <% else %>
+    <body class="bg-body flex">
+      <%= render "shared/sidenav" %>
       <%= yield %>
-    <% end %>
-  </body>
+    </body>
+  <% end %>
 </html>

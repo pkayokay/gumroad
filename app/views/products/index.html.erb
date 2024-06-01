@@ -2,18 +2,56 @@
 
 <div class="p-12">
   <% if @products.present? %>
-    <div class="border border-black rounded-md">
-      Name	Sales	Revenue	Price	Status
-      <% @products.each do |product| %>
-        <%= link_to edit_product_path(product), class: "px-5 py-6 block" do %>
-         <span><%= product.name %></span>
-         <span>$0</span>
-         <span>$<%= product.price %></span>
-         <span><%= product.is_published ? "Published" : "Unpublished" %></span>
-        <% end %>
-      <% end %>
-      Totals
+    <div class="">
+      <div class="flow-root">
+        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+            <table class="min-w-full divide-y divide-gray-300">
+              <thead class=">
+                <tr>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Sales</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Revenue</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <% @products.each do |product| %>
+                <tr>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900 sm:pl-0">
+                    <div class="font-medium"><%= product.name %></div>
+                    <%= link_to product_page_url(username: current_user.username, product_slug: product.slug), product_page_url(username: current_user.username, product_slug: product.slug) %>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4">
+                    <%= link_to "0", "#sales", class: "underline" %>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4">
+                    $0
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4">
+                    $<%= product.price %>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4">
+                    <span><%= product.is_published ? "Published" : "Unpublished" %></span>
+                  </td>
+                </tr>
+              <% end %>
+                <!-- More people... -->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Totals</th>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">0</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">100</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
+
   <% else %>
     <p class="text-lg w-full mt-24 text-center px-5">You don't have any products</p>
   <% end %>

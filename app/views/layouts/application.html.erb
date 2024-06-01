@@ -32,7 +32,6 @@
         <main class="max-w-md mx-auto w-full p-5">
           <%= render "shared/flash" %>
           <h1><%= link_to "Gumroad", admin_path, class: "font-medium uppercase text-3xl my-8 py-5 text-center block" %></h1>
-          <div><%= flash[:notice] || flash[:alert] %></div>
           <%= yield %>
         </main>
       </body>

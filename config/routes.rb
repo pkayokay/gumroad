@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   scope path: 'app' do
     get "/", to: "admin#dashboard", as: :admin
     get "/products", to: "products#index"
+    get "/followers", to: "followers#index"
     get "/settings", to: "settings#index"
     patch "/update_settings", to: "settings#update"
   end

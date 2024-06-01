@@ -7,8 +7,8 @@
       <%= form.label :username %>
       <%= form.text_field :username %>
     </div>
-    <div>
-      <!--<span>View your profile at: </span><%#= link_to root_path %>-->
+    <div class="mt-1">
+      <span>View your profile at: </span><%= link_to profile_url(current_user.username), profile_url(current_user.username), class: "underline", target: "_blank" %>
     </div>
     <br>
     <div>

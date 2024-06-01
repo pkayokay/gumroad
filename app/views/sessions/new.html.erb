@@ -11,5 +11,7 @@
   </div>
   <br>
   <%= render "shared/form_submit_button", form: form, title: "Log in" %>
-  <%= link_to "Don't have an account? Sign up instead.", sign_up_path %>
+  <div class="text-center">
+    <%= link_to "Don't have an account? Sign up instead.", sign_up_path %>
+  </div>
 <% end %>

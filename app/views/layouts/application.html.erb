@@ -15,6 +15,10 @@
   </head>
 
   <body class="bg-body">
-    <%= yield %>
+    <% if is_consumer_side? %>
+      <%= yield %>
+    <% else %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>

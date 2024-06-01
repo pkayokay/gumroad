@@ -14,3 +14,4 @@
 <% else %>
   <p>This product is not currently for sale.</p>
 <% end %>
+<%= link_to "Download \"#{@product.name}\"", root_path + 'gumroad.pdf', target: "_blank", download: @product.name, class: "bg-black text-white"  %>

@@ -8,7 +8,7 @@
   <% if @products.present? %>
     <div class="border border-black rounded-md">
       <% @products.each do |product| %>
-        <%= link_to product.name, edit_product_path(product), class: "px-5 py-6 block" %>
+        <%= link_to product.name, product_page_path(username: @user.username, product_slug: product.slug), class: "px-5 py-6 block" %>
       <% end %>
     </div>
   <% else %>

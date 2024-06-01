@@ -1,1 +1,15 @@
 <%= render "header", title: "Welcome to Gumroad." %>
+<div class="p-12">
+  <h2 class="text-xl mb-4">Metrics</h2>
+  <div class="grid grid-cols-3 gap-5">
+    <%= render "card", title: "Followers", count: current_user.followers.count %>
+    <%= render "card", title: "Sales", count: current_user.followers.count %>
+    <%= render "card", title: "Revenue", count: current_user.followers.count %>
+  </div>
+
+  <h2 class="text-xl mt-12 mb-4">Activity</h2>
+  <div class="border rounded-md border-black p-5 bg-white">
+    <p>Show last purchases</p>
+    <p>Show last followers</p>
+  </div>
+</div>

@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   scope path: 'app' do
     get "/", to: "admin#dashboard", as: :admin
   end
+
+  get "sign_up", to: "registrations#new"
+  post "sign_up", to: "registrations#create"
 end

@@ -4,7 +4,7 @@
   <div class="grid grid-cols-3 gap-5">
     <%= render "card", title: "Followers", count: current_user.followers.count %>
     <%= render "card", title: "Sales", count: current_user.followers.count %>
-    <%= render "card", title: "Revenue", count: current_user.followers.count %>
+    <%= render "card", title: "Revenue", count: "$#{current_user.followers.count}" %>
   </div>
 
   <h2 class="text-xl mt-12 mb-4">Activity</h2>

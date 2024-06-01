@@ -11,7 +11,7 @@
       <li><%= link_to "Emails", "#", class: shared_classes %></li>
       <!--<li><%#= link_to "Workflows", "#", class: shared_classes %></li>-->
       <li><%= link_to "Sales", "#", class: shared_classes %></li>
-      <li><%= link_to "Analytics", "#", class: shared_classes %></li>
+      <li><%= link_to "Analytics", "#", class: last_child_classses %></li>
       <!--<li><%#= link_to "Payouts", "#", class: last_child_classses %></li>-->
     </ul>
     <ul class="">
@@ -20,7 +20,7 @@
     </ul>
   </div>
   <ul class="mt-16">
-    <li><%= link_to "Help", "#", class: shared_classes %></li>
+    <li><%= link_to "Help", "https://help.gumroad.com/", class: shared_classes, target: "_blank" %></li>
     <li><%= link_to "Setings", settings_path, class: shared_classes %></li>
     <li class="text-left">
       <%= button_to sign_out_path, method: :delete, class: "text-left", form: {class: shared_classes }, data: { turbo: false } do %>

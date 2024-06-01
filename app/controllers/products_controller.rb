@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    @product = Product.new(is_published: true)
   end
 
   def edit
@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
   def create
     @product = current_user.products.new(product_create_params)
     if @product.save
-      redirect_to product_path(@product), notice: "Product added!"
+      redirect_to products_path, notice: "Product added!"
     else
       render :new, status: :unprocessable_entity
     end

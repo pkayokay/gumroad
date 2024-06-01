@@ -1,0 +1,21 @@
+<div class="p-10 max-w-2xl">
+  <%= form_with model: @product, url: action_url do |form| %>
+    <%= render "shared/form_errors", form: form %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+    <br>
+    <div>
+      <%= form.label :description %>
+      <%= form.text_area :description, rows: 10 %>
+    </div>
+    <br>
+    <div>
+      <%= form.label :price, "Price $" %>
+      <%= form.number_field :price %>
+    </div>
+    <br>
+    <%= render "shared/form_submit_button", form: form, title: submit_title %>
+  <% end %>
+</div>

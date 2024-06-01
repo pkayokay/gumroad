@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_014542) do
   create_table "products", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.integer "price"
+    t.integer "price", default: 0, null: false
     t.string "slug", null: false
     t.boolean "is_published", default: false, null: false
     t.bigint "user_id", null: false

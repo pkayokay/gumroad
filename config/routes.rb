@@ -6,6 +6,11 @@ Rails.application.routes.draw do
     get "/", to: "admin#dashboard", as: :admin
     get "/products", to: "products#index"
   end
+  resources :products, only: [:new, :edit, :update] do
+    collection do
+      post "/", to: "products#create", as: :create
+    end
+  end
 
   get "sign_in", to: "sessions#new"
   post 'sign_in', to: "sessions#create"

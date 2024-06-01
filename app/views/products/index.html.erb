@@ -1,1 +1,5 @@
-<%= render "admin/header", title: "Products" %>
+<%= render "admin/header", title: "Products", link_info: { path: new_product_path, title: "New Product"} %>
+
+<% @products.each do |product| %>
+  <%= link_to product.name, edit_product_path(product), class: "underline" %>
+<% end %>

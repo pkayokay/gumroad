@@ -17,7 +17,7 @@
             <span class="bg-pink text-black border border-black rounded-md p-3">$<%= number_with_delimiter(@product.price) %></span>
           </div>
           <div class="w-full lg:w-auto h-[80px] p-6 text-center space-x-2 flex items-center">
-              <img src="<%= current_user.avatar_url %>" class="w-[40px] rounded-full " />
+              <img src="<%= @product.user.avatar_url %>" class="w-[40px] rounded-full " />
             <%= link_to profile_path(@product.user.username), class: "underline", target: "_blank" do %>
               <%= @product.user.display_name %>
             <% end %>

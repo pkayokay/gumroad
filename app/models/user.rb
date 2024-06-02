@@ -14,9 +14,14 @@ class User < ApplicationRecord
   has_many :following_users, class_name: 'Follower', foreign_key: 'user_id', dependent: :destroy
 
   before_validation :autoset_username, on: :create
+  before_validation :autoset_avatar_url, on: :create
 
   def autoset_username
     self.username = SecureRandom.alphanumeric(10)
+  end
+
+  def autoset_avatar_url
+    self.avatar_url = Faker::Avatar.image(size: "200x200", format: "bmp", set: "set#{rand(1..4)}", bgset: "bg#{rand(1..4)}")
   end
 
   def display_name

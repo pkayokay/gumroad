@@ -1,6 +1,6 @@
 <% shared_classes = "text-white py-4 block pl-10 pr-12 hover:text-pink duration-100 border-t border-t-neutral-500" %>
 <% last_child_classses = "#{shared_classes} border-b border-b-neutral-500" %>
-<nav class="bg-black h-screen min-w-[210px] overflow-y-scroll flex flex-col">
+<nav class="bg-black h-screen w-[220px] min-w-[220px] overflow-y-scroll flex flex-col">
   <h1><%= link_to "Gumroad", admin_path, class: "text-white font-medium uppercase text-3xl my-8 py-5 text-center block" %></h1>
   <div class="space-y-16 flex-1">
     <ul class="">
@@ -19,8 +19,11 @@
     <li><%= link_to "Setings", settings_path, class: shared_classes + " #{'!text-pink' if request.path == settings_path}" %></li>
     <li class="text-left">
       <%= button_to sign_out_path, method: :delete, class: "text-left", form: {class: shared_classes }, data: { turbo: false } do %>
-      <p class="block truncate w-[150px]"><%= current_user.email %></p>
-      <span class="text-sm">Sign out</span>
+        <img src="<%= current_user.avatar_url %>" class="w-[50px] rounded-full mb-3" />
+        <div>
+          <p class="block truncate w-[150px]"><%= current_user.email %></p>
+          <span class="text-sm">Sign out</span>
+        </div>
       <% end %>
     </li>
   </ul>

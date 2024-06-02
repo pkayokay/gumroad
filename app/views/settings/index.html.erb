@@ -1,6 +1,7 @@
 <%= render "admin/header", title: "Settings" %>
 
 <div class="p-12 max-w-2xl">
+  <img src="<%= current_user.avatar_url %>" class="w-[50px] rounded-full mb-5" />
   <%= form_with model: current_user, url: update_settings_path, method: :patch do |form| %>
     <%= render "shared/form_errors", form: form %>
     <div>

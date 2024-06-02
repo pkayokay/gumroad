@@ -80,6 +80,8 @@ class PagesController < ApplicationController
     @product = @user.products.find_by(slug: params[:product_slug])
     redirect_to root_path if @product.nil?
 
-    @already_purchased = user_signed_in? && current_user.purchases.where(product_id: @product.id).exists?
+    if @product.present?
+      @already_purchased = user_signed_in? && current_user.purchases.where(product_id: @product.id).exists?
+    end
   end
 end

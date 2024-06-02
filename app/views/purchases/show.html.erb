@@ -1,12 +1,40 @@
 <%= render "admin/header", title: @product.name, link_info: { path: library_path, title: "Back to Library", variant: "outline"} %>
 <div class="p-12">
 <p class="font-medium text-xl mb-2">Description</p>
-  <div class="mb-10">
-    <div class="textarea">
-      <%= simple_format(@product.description) %>
-    </div>
+<div class="mb-10">
+  <div class="textarea">
+    <%= simple_format(@product.description) %>
   </div>
-  <div class="mb-6">
-    <%= link_to "Download Product", root_path + 'gumroad.pdf', target: "_blank", download: @product.name, class: "bg-pink text-nowrap border border-black py-4 px-5 rounded-md duration-100 hover:shadow-linkButton inline-block hover:-translate-x-1 hover:-translate-y-1"  %>
+</div>
+<div class="mb-10">
+  <%= link_to "Download Product", root_path + 'gumroad.pdf', target: "_blank", download: @product.name, class: "bg-pink text-nowrap border border-black py-4 px-5 rounded-md duration-100 hover:shadow-linkButton inline-block hover:-translate-x-1 hover:-translate-y-1"  %>
+</div>
+
+<div class="border-t border-black pt-6 mt-6">
+    <% if @purchase.review.blank? %>
+      <p class="font-medium text-xl mb-2">Leave a review</p>
+      <%= form_with model: @review, url: reviews_path do |form| %>
+        <%= render "shared/form_errors", form: form %>
+        <%= form.hidden_field :product_id, value: @product.id %>
+        <%= form.hidden_field :purchase_id, value: @purchase.id %>
+        <div>
+          <%= form.label :rating %>
+          <%= form.select :rating, Review.ratings.keys.map { |k| [k.humanize.capitalize, k] }, { include_blank: 'Please select' }, class: '' %>
+        </div>
+        <br>
+        <div>
+          <%= form.label :body %>
+          <%= form.text_area :body, rows: 5 %>
+        </div>
+        <br>
+        <%= render "shared/form_submit_button", form: form, title: "Submit" %>
+      <% end %>
+    <% else %>
+      <p class="font-medium text-xl mb-2">Your review</p>
+      <p><%= @purchase.review.rating %> star</p>
+      <div class="textarea">
+        <p><%= simple_format(@purchase.review.body) %></p>
+      </div>
+    <% end %>
   </div>
 </div>

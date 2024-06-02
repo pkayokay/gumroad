@@ -62,11 +62,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_02_182035) do
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.text "body"
+    t.integer "rating", null: false
     t.bigint "product_id", null: false
+    t.bigint "purchase_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_reviews_on_product_id"
+    t.index ["purchase_id"], name: "index_reviews_on_purchase_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -90,5 +94,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_02_182035) do
   add_foreign_key "purchases", "products"
   add_foreign_key "purchases", "users"
   add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "purchases"
   add_foreign_key "reviews", "users"
 end

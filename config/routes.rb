@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   post '/subscribe', to: "pages#subscribe"
+  post '/submit_review', to: "purchases#submit_review", as: :reviews
   post '/purchase/:product_id', to: "pages#purchase", as: :purchase
   get "/profile/:username", to: "pages#profile", as: :profile
   get "/profile/:username/p/:product_slug", to: "pages#product", as: :product_page

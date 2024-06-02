@@ -24,4 +24,16 @@ class User < ApplicationRecord
   def initials
     display_name.first.capitalize
   end
+
+  def followers_count
+    followers.count
+  end
+
+  def sales_count
+    products.sum {|p| p.sales_count }
+  end
+
+  def revenue_count
+    products.sum {|p| p.revenue_count }
+  end
 end

@@ -21,7 +21,7 @@
     <div class="mt-5 -mb-2 py-4 px-2 -mx-2 group  flex flex-wrap justify-center md:justify-start">
       <%= render "nav_link", path: root_path, title: "All", is_selected: params[:category].blank? %>
       <% @categories.each do |category| %>
-        <%= render "nav_link", path: root_path(category: category.slug), title: category.name, is_selected: false %>
+        <%= render "nav_link", path: root_path(category: category.slug), title: category.name, is_selected: params[:category] == category.slug %>
       <% end %>
     </div>
     <% if @category.present? %>

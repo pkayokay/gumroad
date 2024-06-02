@@ -30,7 +30,7 @@
   </div>
 </header>
 
-<section class="px-7 py-5 h-[calc(100vh-185px)]">
+<section class="px-7 py-5 min-h-[calc(100vh-185px)]">
   <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 max-w-6xl mx-auto">
     <% @products.each do |product| %>
       <%= render "product", product: product %>
@@ -38,6 +38,6 @@
   </div>
 </section>
 
-<footer class="bg-black px-7 py-9">
+<footer class="bg-black px-7 py-9 mt-10">
   <p class="text-white text-center text-2xl">With Gumroad, anyone can earn their first dollar online.</p>
 </footer>

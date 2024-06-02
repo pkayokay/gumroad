@@ -4,21 +4,26 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   post '/subscribe', to: "pages#subscribe"
+  post '/purchase/:product_id', to: "pages#purchase", as: :purchase
   get "/profile/:username", to: "pages#profile", as: :profile
   get "/profile/:username/p/:product_slug", to: "pages#product", as: :product_page
+  get "/profile/:username/p/:product_slug/checkout", to: "pages#product_checkout", as: :product_checkout
 
   scope path: 'app' do
     get "/", to: "admin#dashboard", as: :admin
+    get "/library", to: "admin#library", as: :library
     get "/products", to: "products#index"
     get "/followers", to: "followers#index"
     get "/settings", to: "settings#index"
     patch "/update_settings", to: "settings#update"
-  end
 
-  resources :products, only: [:new, :edit, :update, :destroy] do
-    collection do
-      post "/", to: "products#create", as: :create
+    resources :products, only: [:new, :edit, :update, :destroy] do
+      collection do
+        post "/", to: "products#create", as: :create
+      end
     end
+
+    get "/library/:purchase_id", to: "purchases#show", as: :purchase_library
   end
 
   get "sign_in", to: "sessions#new"

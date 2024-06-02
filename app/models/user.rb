@@ -7,6 +7,8 @@ class User < ApplicationRecord
   normalizes :email, with: ->(email) { email.strip.downcase }
 
   has_many :products, dependent: :destroy
+  has_many :purchases, dependent: :destroy
+  has_many :product_purchases, through: :products, source: :purchases
   has_many :followers, class_name: 'Follower', foreign_key: 'target_user_id', dependent: :destroy
   has_many :following_users, class_name: 'Follower', foreign_key: 'user_id', dependent: :destroy
 
@@ -22,5 +24,17 @@ class User < ApplicationRecord
 
   def initials
     display_name.first.capitalize
+  end
+
+  def followers_count
+    followers.count
+  end
+
+  def sales_count
+    products.sum {|p| p.sales_count }
+  end
+
+  def revenue_count
+    products.sum {|p| p.revenue_count }
   end
 end

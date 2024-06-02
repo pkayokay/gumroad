@@ -1,0 +1,86 @@
+<header class="min-h-[7rem]  py-10 border-b border-b-black flex items-center justify-between w-full">
+  <div class="max-w-7xl px-10 w-full mx-auto">
+    <h1 class="text-4xl">Checkout</h1>
+  </div>
+</header>
+<div class="mt-8 p-10 max-w-7xl mx-auto flex items-start lg:space-y-0 space-y-10 lg:space-x-10 w-full lg:flex-row flex-col">
+  <div class="bg-white border border-black rounded-md w-full max-w-4xl mx-auto">
+    <div class="flex md:flex-row flex-col">
+      <div id="left" class="flex-1">
+        <div class="border-b border-black flex items-center md:flex-row flex-col">
+          <div class="w-full md:w-auto p-6 md:border-b-0 border-black">
+            <div><%= link_to @product.name, product_page_path(username: @user.username, product_slug: @product.slug), class: "mb-2 text-2xl underline font-medium inline-block" %></div>
+            <%= link_to profile_path(@product.user.username), class: "underline", target: "_blank" do %>
+              <%= @product.user.display_name %>
+            <% end %>
+          </div>
+        </div>
+        <div class="py-7 px-6 flex items-center justify-between ">
+          <div class="font-medium">Total</div>
+          <div>$<%= number_with_delimiter(@product.price) %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= form_with model: @purchase, url: purchase_path(product_id: @product.id), method: :post, class: "bg-white pt-6 w-full lg:w-[600px] border rounded-md border-black" do |form| %>
+    <h2 class="px-6 text-lg font-medium">Pay with</h2>
+    <div class="p-6 border-b border-black w-full">
+      <div>
+        <%= form.label :name, "Name on card" %>
+        <%= form.text_field :name, placeholder: "John Doe"  %>
+      </div>
+      <br>
+      <div>
+        <%= form.label :card, "Card information" %>
+        <%= form.text_field :card, placeholder: "xxxx xxxx xxxx xxxx", maxlength: 19  %>
+      </div>
+      <br>
+      <div class="flex items-center space-x-3">
+        <div class="flex-1">
+          <%= form.label :expiration, "Expiration" %>
+          <%= form.text_field :expiration, placeholder: "XX / XX", maxlength: 19  %>
+        </div>
+        <div class="w-[100px]">
+          <%= form.label :cvc, "CVC" %>
+          <%= form.text_field :cvc, placeholder: "123", maxlength: 4 %>
+        </div>
+      </div>
+    </div>
+    <% if user_signed_in? %>
+      <div class="p-6 pb-0 w-full text-center">
+        <% if @already_purchased %>
+          <div class=" mb-6">
+            <p class="mb-5">You are signed in as <%= current_user.email %> and already own this product.</p>
+            <%= render "shared/link_button", title: "Go to Library", path: library_path, variant: "pink" %>
+            <div class="my-4">or</div>
+            <%= link_to "Download Product", root_path + 'gumroad.pdf', target: "_blank", download: @product.name, class: "text-nowrap border border-black py-4 px-5 rounded-md duration-100 hover:shadow-linkButton inline-block hover:-translate-x-1 hover:-translate-y-1"  %>
+          </div>
+        <% else %>
+          <p>You are signed in as <%= current_user.email %></p>
+          <br>
+          <%= render "shared/form_submit_button", form: form, title: "Pay" %>
+        <% end %>
+      </div>
+    <% else %>
+      <h2 class="pb-0 p-6 text-lg font-medium">Set up account</h2>
+      <div class="w-full flex items-center md:flex-row flex-col">
+        <div class="p-6 w-full">
+          <div>
+            <%= form.label :email, "Email address" %>
+            <%= form.email_field :email, placeholder: "Your email address", required: true  %>
+          </div>
+          <br>
+          <div>
+            <%= form.label :password %>
+            <%= form.password_field :password, placeholder: "Password", required: true  %>
+          </div>
+          <br>
+          <%= render "shared/form_submit_button", form: form, title: "Create account and pay" %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="text-center mt-5 mb-20">
+  <p>Powered by <span class="font-semibold uppercase">Gumroad</span></p>
+</div>

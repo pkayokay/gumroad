@@ -26,13 +26,13 @@
                     <%= link_to product_page_url(username: current_user.username, product_slug: product.slug), product_page_url(username: current_user.username, product_slug: product.slug), class: "underline", target:"_blank" %>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4">
-                    <%= link_to "0", "#sales", class: "underline" %>
+                    <span class="underline"><%= number_with_delimiter(product.sales_count) %></span>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4">
-                    $0
+                    <span class="underline">$<%= number_with_delimiter(product.revenue_count) %></span>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4">
-                    $<%= product.price %>
+                    $<%= number_with_delimiter(product.price) %>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4">
                     <div class="flex items-center space-x-2">
@@ -47,13 +47,16 @@
                   </td>
                 </tr>
               <% end %>
-                <!-- More people... -->
               </tbody>
               <tfoot>
                 <tr>
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left font-semibold text-gray-900 sm:pl-0">Totals</th>
-                  <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">0</th>
-                  <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">100</th>
+                  <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
+                    <%= number_with_delimiter(@products.sum {|p| p.sales_count}) %>
+                  </th>
+                  <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
+                    $<%= number_with_delimiter(@products.sum {|p| p.revenue_count }) %>
+                  </th>
                 </tr>
               </tfoot>
             </table>

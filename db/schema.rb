@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_01_173250) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_01_185630) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_173250) do
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
+  create_table "purchases", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "follower_id", null: false
+    t.bigint "product_id", null: false
+    t.integer "price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follower_id"], name: "index_purchases_on_follower_id"
+    t.index ["product_id"], name: "index_purchases_on_product_id"
+    t.index ["user_id", "product_id"], name: "index_purchases_on_user_id_and_product_id", unique: true
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest"
@@ -53,4 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_173250) do
   add_foreign_key "followers", "users"
   add_foreign_key "followers", "users", column: "target_user_id"
   add_foreign_key "products", "users"
+  add_foreign_key "purchases", "followers"
+  add_foreign_key "purchases", "products"
+  add_foreign_key "purchases", "users"
 end

@@ -1,4 +1,6 @@
-<%= render "admin/header", title: "Settings" %>
+<%= render "admin/header", title: "Settings" do %>
+  <%= button_to "Sign out", sign_out_path, method: :delete, class: "text-nowrap border border-black py-4 px-5 rounded-md duration-100 hover:shadow-linkButton inline-block hover:-translate-x-1 hover:-translate-y-1", form: {class: "" }, data: { turbo: false } %>
+<% end %>
 
 <div class="p-12 max-w-2xl">
   <img src="<%= current_user.avatar_url %>" class="w-[50px] rounded-full mb-5" />

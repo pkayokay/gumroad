@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :products, dependent: :destroy
   has_many :purchases, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_many :product_purchases, through: :products, source: :purchases
   has_many :followers, class_name: 'Follower', foreign_key: 'target_user_id', dependent: :destroy
   has_many :following_users, class_name: 'Follower', foreign_key: 'user_id', dependent: :destroy

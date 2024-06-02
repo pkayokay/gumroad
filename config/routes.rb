@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         post "/", to: "products#create", as: :create
       end
     end
+    resources :posts, only: [:new, :create]
 
     get "/library/:purchase_id", to: "purchases#show", as: :purchase_library
   end

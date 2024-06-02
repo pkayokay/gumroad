@@ -1,4 +1,4 @@
-<%= render "admin/header", title: "Emails" %>
+<%= render "admin/header", title: "Emails", link_info: { path: new_post_path, title: "New Email", variant: "pink"} %>
 <div class="p-12">
   <% if @posts.present? %>
     <div class="">
@@ -19,7 +19,7 @@
                     <div class="text-base group-hover:underline"><%= post.title %></div>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4">
-                    <%= post.body %>
+                    <%= simple_format(post.body) %>
                   </td>
                 </tr>
               <% end %>

@@ -23,5 +23,6 @@ class AdminController < ApplicationController
   end
 
   def emails
+    @posts = current_user.posts
   end
 end

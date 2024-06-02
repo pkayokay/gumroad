@@ -10,6 +10,7 @@ class PagesController < ApplicationController
     redirect_to root_path if @user.nil?
 
     @products = @user.products.published
+    @posts = @user.posts
     @follower = Follower.new
   end
 

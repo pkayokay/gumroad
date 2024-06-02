@@ -10,26 +10,24 @@
     <div class="p-6 border-b border-b-black">
       <h1 class="text-4xl"><%= @product.name %></h1>
     </div>
-    <div class="flex md:flex-row flex-col">
+    <div class="flex lg:flex-row flex-col">
       <div id="left" class="flex-1">
-        <div class="border-b border-black flex items-center md:flex-row flex-col">
-          <div class="w-full md:w-auto p-6 md:border-b-0 border-b md:border-r border-black text-center">
+        <div class="flex-1/2 border-b border-black flex items-center lg:flex-row flex-col">
+          <div class="w-full lg:w-auto h-[80px] p-6 lg:border-b-0 border-b lg:border-r border-black text-center flex items-center">
             <span class="bg-pink text-black border border-black rounded-md p-3">$<%= number_with_delimiter(@product.price) %></span>
           </div>
-          <div class="w-full md:w-auto p-6 md:border-b-0 border-b md:border-r border-black text-center">
+          <div class="w-full lg:w-auto h-[80px] p-6 text-center space-x-2 flex items-center">
+              <img src="<%= current_user.avatar_url %>" class="w-[40px] rounded-full " />
             <%= link_to profile_path(@product.user.username), class: "underline", target: "_blank" do %>
               <%= @product.user.display_name %>
             <% end %>
-          </div>
-          <div class="p-6">
-            0 ratings
           </div>
         </div>
         <div class="textarea p-6">
           <%= simple_format(@product.description) %>
         </div>
       </div>
-      <div id="right" class="md:w-[300px] md:border-t-0 border-t md:border-l border-black p-6">
+      <div id="right" class="lg:w-[300px] lg:border-t-0 border-t lg:border-l border-black p-6">
         <div class="">
           <% if @product.is_published? %>
             <% if @product.user != current_user %>

@@ -31,7 +31,7 @@
       <% end %>
     <% else %>
       <p class="font-medium text-xl mb-2">Your review</p>
-      <p><%= @purchase.review.rating %> star</p>
+      <%= render "shared/review_stars", count: Review.ratings[@purchase.review.rating] %>
       <div class="textarea">
         <p><%= simple_format(@purchase.review.body) %></p>
       </div>

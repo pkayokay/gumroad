@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   validates :price, numericality: { greater_than: -1 }
   belongs_to :user
   has_many :purchases, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   scope :published, -> { where(is_published: true) }
 
@@ -19,5 +20,10 @@ class Product < ApplicationRecord
 
   def revenue_count
     purchases.sum {|p| p.price }
+  end
+
+  def ratings_average
+    return nil unless reviews.exists?
+    reviews.sum {|r| Review.ratings[r.rating] }  / reviews.count
   end
 end

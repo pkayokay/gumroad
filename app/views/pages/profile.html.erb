@@ -1,9 +1,6 @@
 <div class="mt-10 pb-10 border-b border-black px-5">
   <div class="max-w-4xl w-full mx-auto flex items-center justify-between flex-col md:flex-row space-y-3 md:space-y-0">
-    <div class="flex items-center space-x-3">
-      <img src="<%= @user.avatar_url %>" class="w-[40px] rounded-full" />
-      <h1 class="text-2xl"><%= @user.display_name %></h1>
-    </div>
+    <h1 class="text-2xl"><%= @user.display_name %></h1>
     <%= form_with model: @follower, url: subscribe_path(username: @user.username), method: :post, class: "flex items-center space-x-3" do |form| %>
       <div>
         <%= form.email_field :email, placeholder: "Email address", required: true %>
@@ -22,7 +19,7 @@
         <h2 class="text-2xl mb-4">Products</h2>
         <div class="border border-black rounded-md divide-y divide-black">
           <% @products.each do |product| %>
-            <%= link_to product.name, product_page_path(username: @user.username, product_slug: product.slug), class: "hover:underline px-5 py-6 block" %>
+            <%= link_to product.name, product_page_path(username: @user.username, product_slug: product.slug), class: "underline px-5 py-6 block" %>
           <% end %>
         </div>
       </div>
@@ -34,7 +31,18 @@
   <div class="mt-10 pb-10 border-b border-black px-5">
     <div class="max-w-4xl mx-auto flex items-center justify-between w-full">
       <div class="w-full">
-        <h2 class="text-2xl">Posts</h2>
+        <h2 class="text-2xl mb-4">Posts</h2>
+        <div class="border border-black rounded-md divide-y divide-black">
+          <% @posts.each do |post| %>
+            <div class="px-5 py-6">
+              <div class="flex w-full items-start justify-between">
+                <h2 class="text-lg font-semibold"><%= post.title %></h2>
+                <span class="text-sm"><%= post.created_at.strftime("%b %d, %Y") %></span>
+              </div>
+              <p class="textarea mt-4"><%= simple_format(post.body) %></p>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

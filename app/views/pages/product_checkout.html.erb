@@ -52,6 +52,8 @@
           <div class=" mb-6">
             <p class="mb-5">You are signed in as <%= current_user.email %> and already own this product.</p>
             <%= render "shared/link_button", title: "Go to Library", path: library_path, variant: "pink" %>
+            <div class="my-4">or</div>
+            <%= link_to "Download Product", root_path + 'gumroad.pdf', target: "_blank", download: @product.name, class: "text-nowrap border border-black py-4 px-5 rounded-md duration-100 hover:shadow-linkButton inline-block hover:-translate-x-1 hover:-translate-y-1"  %>
           </div>
         <% else %>
           <p>You are signed in as <%= current_user.email %></p>

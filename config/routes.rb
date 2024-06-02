@@ -16,12 +16,14 @@ Rails.application.routes.draw do
     get "/followers", to: "followers#index"
     get "/settings", to: "settings#index"
     patch "/update_settings", to: "settings#update"
-  end
 
-  resources :products, only: [:new, :edit, :update, :destroy] do
-    collection do
-      post "/", to: "products#create", as: :create
+    resources :products, only: [:new, :edit, :update, :destroy] do
+      collection do
+        post "/", to: "products#create", as: :create
+      end
     end
+
+    get "/library/:purchase_id", to: "purchases#show", as: :purchase_library
   end
 
   get "sign_in", to: "sessions#new"

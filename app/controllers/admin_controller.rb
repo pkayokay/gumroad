@@ -3,6 +3,6 @@ class AdminController < ApplicationController
   end
 
   def library
-    @purchases = current_user.purchases
+    @purchases = current_user.purchases.includes(:product)
   end
 end

@@ -1,0 +1,12 @@
+<%= render "admin/header", title: @product.name, link_info: { path: library_path, title: "Go to Library", variant: "outline"} %>
+<div class="p-12">
+<p class="font-medium text-xl mb-2">Description</p>
+  <div class="mb-10">
+    <div class="textarea">
+      <%= simple_format(@product.description) %>
+    </div>
+  </div>
+  <div class="mb-6">
+    <%= link_to "Download Product", root_path + 'gumroad.pdf', target: "_blank", download: @product.name, class: "bg-pink text-nowrap border border-black py-4 px-5 rounded-md duration-100 hover:shadow-linkButton inline-block hover:-translate-x-1 hover:-translate-y-1"  %>
+  </div>
+</div>

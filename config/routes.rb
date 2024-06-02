@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   scope path: 'app' do
     get "/", to: "admin#dashboard", as: :admin
     get "/library", to: "admin#library", as: :library
+    get "/emails", to: "admin#emails", as: :emails
     get "/products", to: "products#index"
     get "/followers", to: "followers#index"
     get "/settings", to: "settings#index"
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
         post "/", to: "products#create", as: :create
       end
     end
+    resources :posts, only: [:new, :create]
 
     get "/library/:purchase_id", to: "purchases#show", as: :purchase_library
   end

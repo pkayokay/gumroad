@@ -1,0 +1,36 @@
+<%= render "admin/header", title: "Emails", link_info: { path: new_post_path, title: "New Email", variant: "pink"} %>
+<div class="p-12">
+  <% if @posts.present? %>
+    <div class="">
+      <div class="flow-root">
+        <div class="-my-2 overflow-x-auto">
+          <div class="inline-block min-w-full align-middle">
+            <table class="min-w-full divide-y divide-gray-300">
+              <thead class="">
+                <tr class="">
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Title</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Body</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <% @posts.each do |post| %>
+                <tr>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900 sm:pl-0">
+                    <div class="text-base group-hover:underline"><%= post.title %></div>
+                  </td>
+                  <td class="whitespace-nowrap px-3 py-4">
+                    <%= simple_format(post.body) %>
+                  </td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <% else %>
+    <p class="text-lg w-full mt-24 text-center px-5">You don't have any emails.</p>
+  <% end %>
+</div>

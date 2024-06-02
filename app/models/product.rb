@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :price, numericality: { greater_than: -1 }
   belongs_to :user
+  has_many :purchases, dependent: :destroy
 
   scope :published, -> { where(is_published: true) }
 
@@ -10,5 +11,13 @@ class Product < ApplicationRecord
 
   def autoset_slug
     self.slug = SecureRandom.alphanumeric(10)
+  end
+
+  def sales_count
+    purchases.count
+  end
+
+  def revenue_count
+    purchases.sum {|p| p.price }
   end
 end

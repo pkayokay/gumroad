@@ -1,0 +1,6 @@
+<%= render "admin/header", title: "Library" %>
+
+<% @purchases.each do |purchase| %>
+  <%= purchase.id %>
+  <%= purchase.price %>
+<% end %>

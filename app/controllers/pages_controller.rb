@@ -32,7 +32,46 @@ class PagesController < ApplicationController
   end
 
   def product_checkout
+    @purchase = Purchase.new
+
+    @already_purchased = user_signed_in? && current_user.purchases.where(product_id: @product.id).exists?
     redirect_to root_path if @user == current_user
+  end
+
+  def purchase
+    @product = Product.find(params[:product_id])
+    @product_user = @product.user
+
+    if user_signed_in?
+      @follower = @product_user.followers.find_by(email: current_user.email) || Follower.create(user: current_user, email: current_user.email, target_user: @product_user)
+      @purchase = Purchase.create(user: current_user, price: @product.price, product: @product)
+      flash[:notice] = "Purchased!"
+      redirect_to library_path
+    else
+      email = params[:purchase][:email]&.strip
+      password = params[:purchase][:password]
+
+      @user = User.find_by(email: email)
+      if @user
+        flash[:alert] = "Account exists, sign in before purchasing the product."
+        redirect_to product_checkout_path(username: @product_user.username, product_slug: @product.slug)
+      else
+        transaction = Purchase.transaction do
+          @user = User.create!(email: email, password: password)
+          @follower = @product_user.followers.find_by(email: email) || Follower.create!(user: @user, email: email, target_user: @product_user)
+          @purchase = Purchase.create!(user: @user, price: @product.price, product: @product)
+        end
+
+        if transaction
+          sign_in(@user)
+          flash[:notice] = "Purchased!"
+          redirect_to library_path
+        else
+          flash[:alert] = "Sorry, something went wrong"
+          redirect_to product_checkout_path(username: @user.username, product_slug: product.slug)
+        end
+      end
+    end
   end
 
   def set_product

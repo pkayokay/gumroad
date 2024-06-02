@@ -17,7 +17,7 @@
     </ul>
     <ul class="">
       <li><%= link_to "Discover", root_path, class: shared_classes %></li>
-      <li><%= link_to "Library", "#", class: last_child_classses %></li>
+      <li><%= link_to "Library", library_path, class: last_child_classses %></li>
     </ul>
   </div>
   <ul class="mt-16">
@@ -25,7 +25,7 @@
     <li><%= link_to "Setings", settings_path, class: shared_classes + " #{'!text-pink' if request.path == settings_path}" %></li>
     <li class="text-left">
       <%= button_to sign_out_path, method: :delete, class: "text-left", form: {class: shared_classes }, data: { turbo: false } do %>
-      <span><%= current_user.email %></p>
+      <p class="block truncate w-[150px]"><%= current_user.email %></p>
       <span class="text-sm">Sign out</span>
       <% end %>
     </li>

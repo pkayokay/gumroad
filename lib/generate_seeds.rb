@@ -10,7 +10,7 @@ class GenerateSeeds
       rand(1..7).times do
         product = user.products.create!(
           name: Faker::Book.title,
-          description: rand(1..2) == 1 ? Faker::Quote.famous_last_words : nil,
+          description: Faker::Quote.famous_last_words,
           price: rand(1..100),
           is_published: true
         )

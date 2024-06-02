@@ -1,30 +1,37 @@
 <header class="px-7 py-7 border-b border-black w-full">
-  <div class="flex w-full justify-between items-center">
+  <div class="w-full justify-between items-center flex sm:flex-row flex-col space-y-4 sm:space-y-0">
     <h1 class="text-4xl font-semibold">
       <%= link_to "GUMROAD", root_path %>
     </h1>
-    <div class="space-x-3">
-      <!--If logged in-->
-      <% if user_signed_in? %>
+    <% if user_signed_in? %>
+      <div class="space-x-5 flex items-center">
         <%= render "shared/link_button", title: "Library", path: admin_path, variant: "outline" %>
-        <%= render "shared/link_button", title: "Start selling", path: products_path, variant: "black" %>
-      <% else %>
+        <%= link_to settings_path do %>
+          <img src="<%= current_user.avatar_url %>" class="w-[50px] rounded-full" />
+        <% end %>
+      </div>
+    <% else %>
+      <div class="space-x-3">
         <%= render "shared/link_button", title: "Login", path: sign_in_path, variant: "outline" %>
         <%= render "shared/link_button", title: "Start selling", path: sign_up_path, variant: "black" %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
-  <div class="mt-5 group inline-block">
+  <div class="mt-5 -mb-2 py-4 px-2 -mx-2 group overflow-x-scroll flex flex-nowrap">
     <%= render "nav_link", path: root_path, title: "All", is_selected: params[:category].blank? %>
-    <%= render "nav_link", path: root_path(category: "3D"), title: "3D", is_selected: params[:category] == "3D" %>
-    <%= render "nav_link", path: root_path(category: "Audio"), title: "Audio", is_selected: params[:category] == "Audio" %>
+    <% @categories.each do |category| %>
+      <%= render "nav_link", path: root_path(category: category.slug), title: category.name, is_selected: false %>
+    <% end %>
   </div>
-  <% if params[:category].present? %>
-    <h2 class="mt-4 text-2xl"><%= params[:category] %></h2>
+  <% if @category.present? %>
+    <h2 class="mt-4 text-2xl"><%= @category.name %></h2>
   <% end %>
 </header>
 
 <section class="px-7 py-5 h-[calc(100vh-185px)]">
+  <% @products.each do |product| %>
+    <%= link_to product.name, product_page_path(username: product.user.username, product_slug: product.slug), class: "block underline mb-4" %>
+  <% end %>
   <!--If logged in-->
   <h2 class="font-normal text-xl">Recommended for you</h2>
   <div id="recommended-for-you"></div>

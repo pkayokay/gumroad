@@ -3,6 +3,13 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
+    @categories = Category.order(name: :asc)
+    if params[:category].present?
+      @category = Category.find_by(slug: params[:category])
+      @products = Product.all.published.joins(:product_category).where(product_category: {category: @category})
+    else
+      @products = Product.all.published
+    end
   end
 
   def profile

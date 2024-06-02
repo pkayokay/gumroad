@@ -8,7 +8,7 @@ class PagesController < ApplicationController
       @category = Category.find_by(slug: params[:category])
       @products = Product.all.published.joins(:product_category).where(product_category: {category: @category})
     else
-      @products = Product.all.published
+      @products = Product.all.published.limit(15)
     end
   end
 

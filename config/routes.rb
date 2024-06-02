@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   scope path: 'app' do
     get "/", to: "admin#dashboard", as: :admin
     get "/library", to: "admin#library", as: :library
+    get "/emails", to: "admin#emails", as: :emails
     get "/products", to: "products#index"
     get "/followers", to: "followers#index"
     get "/settings", to: "settings#index"

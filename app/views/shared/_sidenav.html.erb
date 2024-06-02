@@ -6,7 +6,7 @@
     <ul class="">
       <li><%= link_to "Home", admin_path, class: shared_classes + " #{'!text-pink' if request.path == admin_path}" %></li>
       <li><%= link_to "Products", products_path, class: shared_classes + " #{'!text-pink' if request.path == products_path}" %></li>
-      <li><%= link_to "Emails", "#", class: shared_classes %></li>
+      <li><%= link_to "Emails", emails_path, class: shared_classes %></li>
       <li><%= link_to "Followers", followers_path, class: last_child_classses + " #{'!text-pink' if request.path == followers_path}" %></li>
     </ul>
     <ul class="">

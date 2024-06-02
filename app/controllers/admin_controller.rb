@@ -21,4 +21,7 @@ class AdminController < ApplicationController
   def library
     @purchases = current_user.purchases.includes(:product)
   end
+
+  def emails
+  end
 end

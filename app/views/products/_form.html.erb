@@ -22,6 +22,11 @@
         <%= form.number_field :price, data: {action: "preview#handlePrice"} %>
       </div>
       <br>
+      <div>
+        <%= form.label :category_id, "Category" %>
+        <%= form.select :category_id, Category.all.map { |k| [k.name, k.id] }, { include_blank: 'Please select a category', selected: @product.product_category&.category_id }, class: '', required: true %>
+      </div>
+      <br>
         <label class="relative inline-flex items-center cursor-pointer">
           <%= form.check_box :is_published, class: "sr-only peer"%>
           <div class="w-11 h-6 bg-white rounded-full border border-black peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-black after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-black after:border-black after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-pink"></div>

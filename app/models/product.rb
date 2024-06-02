@@ -10,9 +10,14 @@ class Product < ApplicationRecord
   scope :published, -> { where(is_published: true) }
 
   before_validation :autoset_slug, on: :create
+  before_validation :autoset_image_url, on: :create
 
   def autoset_slug
     self.slug = SecureRandom.alphanumeric(10)
+  end
+
+  def autoset_image_url
+    self.image_url = Faker::Avatar.image(size: "400x400", format: "jpg", set: "set#{rand(1..4)}", bgset: "bg#{rand(1..4)}")
   end
 
   def sales_count

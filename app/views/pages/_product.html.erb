@@ -1,4 +1,15 @@
 <%= link_to product_page_path(username: product.user.username, product_slug: product.slug),
-  class: "border border-black rounded-md" do %>
-  <%= product.name %>
+  class: "border border-black rounded-md duration-100 hover:shadow-linkButton inline-block " do %>
+  <div>
+    <div><%= product.name %></div>
+    <div><%= product.user.display_name %></div>
+    <div><%= product.user.display_name %></div>
+    <div>
+      <svg class="fill fill-black" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span><%= product.ratings_average.to_d %> (<%= product.reviews.count %>)</span>
+    </div>
+    <div>
+      <div>$<%= product.price %></div>
+    </div>
+  </div>
 <% end %>

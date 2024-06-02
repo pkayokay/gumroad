@@ -2,15 +2,23 @@
 <div class="p-12">
   <h2 class="text-xl mb-4">Metrics</h2>
   <div class="grid grid-cols-3 gap-5">
-    <%= render "card", title: "Followers", count: current_user.followers_count %>
-    <%= render "card", title: "Sales", count: current_user.sales_count %>
-    <%= render "card", title: "Revenue", count: "$#{current_user.revenue_count}" %>
+    <%= render "card", title: "Followers", count: number_with_delimiter(current_user.followers_count) %>
+    <%= render "card", title: "Sales", count: number_with_delimiter(current_user.sales_count) %>
+    <%= render "card", title: "Revenue", count: "$#{number_with_delimiter(current_user.revenue_count)}" %>
   </div>
 
   <h2 class="text-xl mt-12 mb-4">Activity</h2>
   <div class="border rounded-md border-black p-5 bg-white">
     <% if @activities.present? %>
-      <!--Loops through activities-->
+      <div class="space-y-2">
+        <% @activities.each do |activity| %>
+          <% if activity[:class_name] == "Purchase" %>
+            <div><%= activity[:user] %> <span class="font-semibold">purchased</span> <%= activity[:product] %> <%= time_ago_in_words(activity[:created_at]) %> ago.</div>
+          <% elsif activity[:class_name] == "Follower" %>
+            <div><%= activity[:user] %></span> <span class="font-semibold">subscribed</span> <%= time_ago_in_words(activity[:created_at]) %> ago.</div>
+          <% end %>
+        <% end %>
+      </div>
     <% else %>
       <div class="text-center">
         <p class="py-5">You don't have any activity.</p>

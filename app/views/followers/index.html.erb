@@ -20,7 +20,7 @@
                     <div class="text-base group-hover:underline"><%= follower.email %></div>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4">
-                    0
+                    $<%= number_with_delimiter(follower.revenue_count) %>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4">
                     <div class="flex items-center space-x-2">

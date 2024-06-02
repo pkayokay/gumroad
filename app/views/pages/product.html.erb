@@ -14,7 +14,7 @@
       <div id="left" class="flex-1">
         <div class="border-b border-black flex items-center md:flex-row flex-col">
           <div class="w-full md:w-auto p-6 md:border-b-0 border-b md:border-r border-black text-center">
-            <span class="bg-pink text-black border border-black rounded-md p-3">$<%= @product.price %></span>
+            <span class="bg-pink text-black border border-black rounded-md p-3">$<%= number_with_delimiter(@product.price) %></span>
           </div>
           <div class="w-full md:w-auto p-6 md:border-b-0 border-b md:border-r border-black text-center">
             <%= link_to profile_path(@product.user.username), class: "underline", target: "_blank" do %>

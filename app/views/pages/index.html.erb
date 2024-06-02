@@ -1,40 +1,41 @@
 <header class="px-7 py-7 border-b border-black w-full">
-  <div class="flex w-full justify-between items-center">
-    <h1 class="text-4xl font-semibold">
-      <%= link_to "GUMROAD", root_path %>
-    </h1>
-    <div class="space-x-3">
-      <!--If logged in-->
+  <div class="max-w-6xl mx-auto">
+    <div class="w-full justify-between items-center flex sm:flex-row flex-col space-y-4 sm:space-y-0">
+      <h1 class="text-4xl font-semibold">
+        <%= link_to "GUMROAD", root_path %>
+      </h1>
       <% if user_signed_in? %>
-        <%= render "shared/link_button", title: "Library", path: admin_path, variant: "outline" %>
-        <%= render "shared/link_button", title: "Start selling", path: products_path, variant: "black" %>
+        <div class="space-x-5 flex items-center">
+          <%= render "shared/link_button", title: "Library", path: admin_path, variant: "outline" %>
+          <%= link_to settings_path do %>
+            <img src="<%= current_user.avatar_url %>" class="w-[50px] rounded-full" />
+          <% end %>
+        </div>
       <% else %>
-        <%= render "shared/link_button", title: "Login", path: sign_in_path, variant: "outline" %>
-        <%= render "shared/link_button", title: "Start selling", path: sign_up_path, variant: "black" %>
+        <div class="space-x-3">
+          <%= render "shared/link_button", title: "Login", path: sign_in_path, variant: "outline" %>
+          <%= render "shared/link_button", title: "Start selling", path: sign_up_path, variant: "black" %>
+        </div>
       <% end %>
     </div>
+    <div class="mt-5 -mb-2 py-4 px-2 -mx-2 group  flex flex-wrap justify-center md:justify-start">
+      <%= render "nav_link", path: root_path, title: "All", is_selected: params[:category].blank? %>
+      <% @categories.each do |category| %>
+        <%= render "nav_link", path: root_path(category: category.slug), title: category.name, is_selected: false %>
+      <% end %>
+    </div>
+    <% if @category.present? %>
+      <h2 class="mt-4 text-2xl"><%= @category.name %></h2>
+    <% end %>
   </div>
-  <div class="mt-5 group inline-block">
-    <%= render "nav_link", path: root_path, title: "All", is_selected: params[:category].blank? %>
-    <%= render "nav_link", path: root_path(category: "3D"), title: "3D", is_selected: params[:category] == "3D" %>
-    <%= render "nav_link", path: root_path(category: "Audio"), title: "Audio", is_selected: params[:category] == "Audio" %>
-  </div>
-  <% if params[:category].present? %>
-    <h2 class="mt-4 text-2xl"><%= params[:category] %></h2>
-  <% end %>
 </header>
 
 <section class="px-7 py-5 h-[calc(100vh-185px)]">
-  <!--If logged in-->
-  <h2 class="font-normal text-xl">Recommended for you</h2>
-  <div id="recommended-for-you"></div>
-  <!--else-->
-  <h2 class="font-normal text-xl">Staff picks</h2>
-  <!--end-->
-  <div id="staff-picks"></div>
-
-  <h2 class="font-normal text-xl">Products by category</h2>
-  <div id="products-by-category"></div>
+  <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 max-w-6xl mx-auto">
+    <% @products.each do |product| %>
+      <%= render "product", product: product %>
+    <% end %>
+  </div>
 </section>
 
 <footer class="bg-black px-7 py-9">

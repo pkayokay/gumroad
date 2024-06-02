@@ -13,7 +13,14 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @product.update(product_create_params)
+    transaction = Product.transaction do
+      @product.update(product_create_params)
+      if @product.product_category.category_id != params[:product][:category_id].to_i
+        @product.product_category.update(category_id: params[:product][:category_id].to_i)
+      end
+    end
+
+    if transaction
       redirect_to product_path(@product), notice: "Product updated!"
     else
       render :edit, status: :unprocessable_entity
@@ -22,7 +29,13 @@ class ProductsController < ApplicationController
 
   def create
     @product = current_user.products.new(product_create_params)
-    if @product.save
+
+    transaction = Product.transaction do
+      @product.save
+      ProductCategory.create!(product: @product, category_id: params[:product][:category_id])
+    end
+
+    if transaction
       redirect_to products_path, notice: "Product added!"
     else
       render :new, status: :unprocessable_entity

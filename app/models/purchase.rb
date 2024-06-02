@@ -4,5 +4,5 @@ class Purchase < ApplicationRecord
   belongs_to :follower
   belongs_to :user
   belongs_to :product
-  has_one :review
+  has_one :review, dependent: :destroy
 end

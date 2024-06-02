@@ -21,7 +21,7 @@ class User < ApplicationRecord
   end
 
   def autoset_avatar_url
-    self.avatar_url = Faker::Avatar.image(size: "200x200", format: "bmp", set: "set#{rand(1..4)}", bgset: "bg#{rand(1..4)}")
+    self.avatar_url = Faker::Avatar.image(size: "200x200", format: "jpg", set: "set#{rand(1..4)}", bgset: "bg#{rand(1..4)}")
   end
 
   def display_name

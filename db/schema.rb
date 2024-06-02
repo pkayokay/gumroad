@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_02_182035) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_02_220636) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
+  end
 
   create_table "followers", force: :cascade do |t|
     t.string "email", null: false
@@ -34,6 +43,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_02_182035) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "product_categories", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_product_categories_on_category_id"
+    t.index ["product_id"], name: "index_product_categories_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -43,6 +61,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_02_182035) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_url", null: false
     t.index ["is_published"], name: "index_products_on_is_published"
     t.index ["slug"], name: "index_products_on_slug", unique: true
     t.index ["user_id"], name: "index_products_on_user_id"
@@ -89,6 +108,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_02_182035) do
   add_foreign_key "followers", "users"
   add_foreign_key "followers", "users", column: "target_user_id"
   add_foreign_key "posts", "users"
+  add_foreign_key "product_categories", "categories"
+  add_foreign_key "product_categories", "products"
   add_foreign_key "products", "users"
   add_foreign_key "purchases", "followers"
   add_foreign_key "purchases", "products"

@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     redirect_to root_path if @user.nil?
 
     @products = @user.products.published
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: :desc)
     @follower = Follower.new
   end
 

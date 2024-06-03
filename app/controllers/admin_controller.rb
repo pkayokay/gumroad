@@ -19,10 +19,10 @@ class AdminController < ApplicationController
   end
 
   def library
-    @purchases = current_user.purchases.includes(:product)
+    @purchases = current_user.purchases.order(created_at: :desc).includes(:product)
   end
 
   def emails
-    @posts = current_user.posts
+    @posts = current_user.posts.order(created_at: :desc)
   end
 end

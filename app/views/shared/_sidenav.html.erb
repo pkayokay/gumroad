@@ -18,10 +18,17 @@
     <li><%= link_to "Help", "https://help.gumroad.com/", class: shared_classes, target: "_blank" %></li>
     <li><%= link_to "Setings", settings_path, class: shared_classes + " #{'!text-pink' if request.path == settings_path}" %></li>
     <li class="text-left <%= shared_classes %> !text-white">
-    <img src="<%= current_user.avatar_url %>" class="w-[50px] rounded-full mb-3" />
-    <div>
-      <p class="block truncate w-[150px]"><%= current_user.email %></p>
-    </div>
+      <img src="<%= current_user.avatar_url %>" class="w-[50px] rounded-full mb-3" />
+      <div>
+        <p class="block truncate w-[150px]"><%= current_user.email %></p>
+      </div>
+    </li>
+    <li class="text-left">
+      <%= button_to sign_out_path, method: :delete, class: "text-left", form: {class: "#{shared_classes} border-t-0" }, data: { turbo: false } do %>
+        <div>
+          <span class="">Sign out</span>
+        </div>
+      <% end %>
     </li>
   </ul>
 </nav>

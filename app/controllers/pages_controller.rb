@@ -52,7 +52,7 @@ class PagesController < ApplicationController
       @follower = @product_user.followers.find_by(email: current_user.email) || Follower.create(user: current_user, email: current_user.email, target_user: @product_user)
       @purchase = Purchase.create(follower: @follower, user: current_user, price: @product.price, product: @product)
       flash[:notice] = "Purchased!"
-      redirect_to library_path
+      redirect_to purchase_library_path(purchase_id: @purchase.id)
     else
       email = params[:purchase][:email]&.strip
       password = params[:purchase][:password]
@@ -71,7 +71,7 @@ class PagesController < ApplicationController
         if transaction
           sign_in(@user)
           flash[:notice] = "Purchased!"
-          redirect_to library_path
+          redirect_to purchase_library_path(purchase_id: @purchase.id)
         else
           flash[:alert] = "Sorry, something went wrong"
           redirect_to product_checkout_path(username: @user.username, product_slug: product.slug)
@@ -88,7 +88,9 @@ class PagesController < ApplicationController
     redirect_to root_path if @product.nil?
 
     if @product.present?
-      @already_purchased = user_signed_in? && current_user.purchases.where(product_id: @product.id).exists?
+      if user_signed_in? && @existing_purchase = current_user.purchases.find_by(product_id: @product.id)
+        @already_purchased = true
+      end
     end
   end
 end

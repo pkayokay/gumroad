@@ -8,7 +8,7 @@ class PagesController < ApplicationController
       @category = Category.find_by(slug: params[:category])
       @products = Product.order(created_at: :desc).published.joins(:product_category).where(product_category: {category: @category})
     else
-      @products = Product.order(created_at: :desc).published.limit(15)
+      @products = Product.order(created_at: :desc).published.limit(20)
     end
   end
 

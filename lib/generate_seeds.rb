@@ -15,8 +15,7 @@ class GenerateSeeds
             price: rand(1..100),
             is_published: true
           )
-
-          ProductCategory.create!(product: product, category: Category.find_by(id: rand(1..Category.count)))
+          ProductCategory.create!(product: product, category: Category.order('RANDOM()').first)
         end
       rescue
         next

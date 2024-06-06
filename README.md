@@ -7,7 +7,7 @@ A clone of Gumroad.com with basic features.
 - Products
   - Users can purchase products and see them in their library.
     - One caveat is that users must sign up to purchase a product (to simplify this version of Gumroad).
-  - Users can browser the product marketplace by category.
+  - Users can browse the product marketplace by category.
 - Reviews
   - Users can leave reviews for their purchased products.
 - Emails
@@ -15,7 +15,7 @@ A clone of Gumroad.com with basic features.
 - Followers
   - Users purchasing a product become a follower of the user who owns the purchased product.
 - User
-  - Public profile page that displays products, posts and a way to subscribe as a follower.
+  - Public profile page displays products, posts and a way to subscribe as a follower.
 
 ### Teck Stack
 

@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
   def create
     if user = User.authenticate_by(email: params[:email], password: params[:password])
       sign_in(user)
-      user.update(last_sign_in_at: Time.current)
       redirect_to admin_path, notice: "Welcome Back!"
     else
       flash.now[:alert] = "Invalid email or password"

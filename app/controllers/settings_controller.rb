@@ -13,6 +13,6 @@ class SettingsController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :name)
+    params.require(:user).permit(:username, :name, :is_tipping_enabled)
   end
 end

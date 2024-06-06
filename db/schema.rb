@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_06_194258) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_06_195317) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -113,6 +113,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_194258) do
     t.string "username", null: false
     t.string "avatar_url", null: false
     t.datetime "last_sign_in_at"
+    t.boolean "is_tipping_enabled", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

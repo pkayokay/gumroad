@@ -1,6 +1,6 @@
 # Gumroad Clone
 
-A Gumroad clone that has some basic features from Gumroad.
+A clone of Gumroad.com with basic features.
 
 ### Features
 

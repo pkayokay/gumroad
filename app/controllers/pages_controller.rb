@@ -24,6 +24,11 @@ class PagesController < ApplicationController
   def tips
     @user = User.find_by(username: params[:username])
     redirect_to root_path if @user.nil?
+
+    if @user == current_user
+      flash[alert] =  "You can't tip yourself"
+      redirect_to root_path
+    end
   end
 
   def subscribe
@@ -46,7 +51,10 @@ class PagesController < ApplicationController
   def product_checkout
     @purchase = Purchase.new
 
-    redirect_to root_path if @user == current_user
+    if @user == current_user
+      flash[alert] =  "You can't purchase your own product."
+      redirect_to root_path
+    end
   end
 
   def purchase

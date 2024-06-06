@@ -5,4 +5,6 @@
   <%= link_to title, path, class: "text-black #{shared_classes}" %>
 <% elsif variant == "pink" %>
   <%= link_to title, path, class: "text-black #{shared_classes} bg-pink" %>
+<% elsif variant == "outline--small" %>
+  <%= link_to title, path, class: "text-black #{shared_classes} !py-2 !px-4 bg-pink" %>
 <% end %>

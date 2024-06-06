@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/submit_review', to: "purchases#submit_review", as: :reviews
   post '/purchase/:product_id', to: "pages#purchase", as: :purchase
   get "/profile/:username", to: "pages#profile", as: :profile
+  get "/profile/:username/tips", to: "pages#tips", as: :tips
   get "/profile/:username/p/:product_slug", to: "pages#product", as: :product_page
   get "/profile/:username/p/:product_slug/checkout", to: "pages#product_checkout", as: :product_checkout
 

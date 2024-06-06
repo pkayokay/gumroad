@@ -1,10 +1,10 @@
 <div class="mt-10 pb-10 border-b border-black px-5">
-  <div class="max-w-5xl w-full mx-auto flex items-center justify-between flex-col md:flex-row space-y-3 md:space-y-0">
-    <div class="flex items-center space-x-2">
+  <div class="max-w-5xl w-full mx-auto flex items-center justify-between flex-col lg:flex-row space-y-6 lg:space-y-0">
+    <div class="flex items-center space-x-4">
       <img src="<%= @user.avatar_url %>" class="w-[50px] rounded-full" />
       <h1 class="text-2xl"><%= @user.display_name %></h1>
     </div>
-    <div class="flex items-center space-x-5 flex-col md:flex-row space-y-3 md:space-y-0">
+    <div class="flex items-center space-x-5 flex-col lg:flex-row space-y-6 lg:space-y-0">
       <%= form_with model: @follower, url: subscribe_path(username: @user.username), method: :post, class: "flex items-center space-x-3" do |form| %>
         <div>
           <%= form.email_field :email, placeholder: "Email address", required: true %>
@@ -15,7 +15,7 @@
       <% end %>
       <% if @user.is_tipping_enabled? %>
         <div>
-          <p>Support</p>
+          <%= render "shared/link_button", title: "Support By Tipping", path: tips_path(username: @user.username), variant: "outline--small" %>
         </div>
       <% end %>
     </div>

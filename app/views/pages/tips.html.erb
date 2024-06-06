@@ -1,0 +1,10 @@
+<div class="mt-10 pb-10 border-b border-black px-5">
+  <div class="max-w-5xl w-full mx-auto flex items-center justify-between flex-col md:flex-row space-y-3 md:space-y-0">
+    <div class="flex items-center space-x-2">
+      <img src="<%= @user.avatar_url %>" class="w-[50px] rounded-full" />
+      <h1 class="text-2xl">Support  <%= link_to @user.display_name, profile_path(username: @user.username), class: "underline" %> by tipping!</h1>
+    </div>
+    <div class="flex items-center space-x-5 flex-col md:flex-row space-y-3 md:space-y-0">
+    </div>
+  </div>
+</div>

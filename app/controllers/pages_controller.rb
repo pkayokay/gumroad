@@ -21,6 +21,11 @@ class PagesController < ApplicationController
     @follower = Follower.new
   end
 
+  def tips
+    @user = User.find_by(username: params[:username])
+    redirect_to root_path if @user.nil?
+  end
+
   def subscribe
     follower_params = params.require(:follower).permit(:email)
     @target_user = User.find_by(username: params[:username])

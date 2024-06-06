@@ -2,7 +2,7 @@
 
 A clone of Gumroad.com with basic features.
 
-### Features
+## Features
 
 - Products
   - Users can purchase products and see them in their library.
@@ -17,9 +17,17 @@ A clone of Gumroad.com with basic features.
 - User
   - Public profile page displays products, posts and a way to subscribe as a follower.
 
-### Teck Stack
+## Teck Stack
 
 * Rails
 * PostgreSQL
 * Tailwind CSS
 * StimulusJS
+
+## Setup
+
+1. Clone the repo
+2. Install Ruby `3.3.0`  and Rails `7.1.3.3`
+2. Instal dependencies `bundle install` && `yarn install`
+3. Run migrations `rails db:create && rails db:schema:load`
+4. Run the server `bin/dev` and visit `http://localhost:3000`

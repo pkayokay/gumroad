@@ -1,23 +1,30 @@
 <div class="mt-10 pb-10 border-b border-black px-5">
-  <div class="max-w-4xl w-full mx-auto flex items-center justify-between flex-col md:flex-row space-y-3 md:space-y-0">
-    <div class="flex items-center space-x-2">
+  <div class="max-w-5xl w-full mx-auto flex items-center justify-between flex-col lg:flex-row space-y-6 lg:space-y-0">
+    <div class="flex items-center space-x-4">
       <img src="<%= @user.avatar_url %>" class="w-[50px] rounded-full" />
       <h1 class="text-2xl"><%= @user.display_name %></h1>
     </div>
-    <%= form_with model: @follower, url: subscribe_path(username: @user.username), method: :post, class: "flex items-center space-x-3" do |form| %>
-      <div>
-        <%= form.email_field :email, placeholder: "Email address", required: true %>
-      </div>
-      <div class="-mb-6">
-        <%= render "shared/form_submit_button", form: form, title: "Subscribe" %>
-      </div>
-    <% end %>
+    <div class="flex items-center space-x-5 flex-col lg:flex-row space-y-6 lg:space-y-0">
+      <%= form_with model: @follower, url: subscribe_path(username: @user.username), method: :post, class: "flex items-center space-x-3" do |form| %>
+        <div>
+          <%= form.email_field :email, placeholder: "Email address", required: true %>
+        </div>
+        <div class="-mb-6">
+          <%= render "shared/form_submit_button", form: form, title: "Subscribe" %>
+        </div>
+      <% end %>
+      <% if @user.is_tipping_enabled? %>
+        <div>
+          <%= render "shared/link_button", title: "Support By Tipping", path: tips_path(username: @user.username), variant: "outline--small" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
 <% if @products.present? %>
   <div class="mt-10 pb-10 border-b border-black px-5">
-    <div class="max-w-4xl mx-auto flex items-center justify-between w-full">
+    <div class="max-w-5xl mx-auto flex items-center justify-between w-full">
       <div class="w-full">
         <h2 class="text-2xl mb-4">Products</h2>
         <div class="border border-black rounded-md divide-y divide-black">
@@ -35,7 +42,7 @@
 
 <% if @posts.present? %>
   <div class="mt-10 pb-10 border-b border-black px-5">
-    <div class="max-w-4xl mx-auto flex items-center justify-between w-full">
+    <div class="max-w-5xl mx-auto flex items-center justify-between w-full">
       <div class="w-full">
         <h2 class="text-2xl mb-4">Posts</h2>
         <div class="border border-black rounded-md divide-y divide-black">
@@ -53,6 +60,5 @@
     </div>
   </div>
 <% end %>
-<div class="text-center mt-10 mb-20">
-  <p>Powered by <span class="font-semibold uppercase">Gumroad</span></p>
-</div>
+
+<%= render "powered_by" %>

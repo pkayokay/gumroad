@@ -16,6 +16,8 @@ A clone of Gumroad.com with basic features.
   - Users purchasing a product become a follower of the user who owns the purchased product.
 - User
   - Public profile page displays products, posts and a way to subscribe as a follower.
+- Tips
+  - Any user can give a one time tip to a creator.
 
 ## Teck Stack
 

@@ -1,0 +1,63 @@
+<div class="mt-10 pb-10 border-b border-black px-5">
+  <div class="max-w-5xl w-full mx-auto flex items-center justify-between flex-col md:flex-row space-y-3 md:space-y-0">
+    <div class="flex items-center space-x-2">
+      <img src="<%= @user.avatar_url %>" class="w-[50px] rounded-full" />
+      <h1 class="text-2xl">Support  <%= link_to @user.display_name, profile_path(username: @user.username), class: "underline" %></h1>
+    </div>
+    <div class="flex items-center space-x-5 flex-col md:flex-row space-y-3 md:space-y-0">
+    </div>
+  </div>
+</div>
+
+<div class="mt-10 pb-10 border-b border-black px-5">
+  <div class="max-w-2xl mx-auto flex items-center justify-between w-full">
+    <div class="w-full">
+      <h2 class="text-2xl mb-4"></h2>
+      <div class="border border-black rounded-md divide-y divide-black">
+        <div class="px-5 py-6">
+          <div class="flex w-full items-start justify-between">
+            <h2 class="mb-3 text-xl font-semibold">Support By Tipping</h2>
+          </div>
+            <%= form_with model: @tip, url: give_tip_path(username: @user.username), method: :post do |form| %>
+              <%= render "shared/form_errors", form: form %>
+              <div class="pb-12 mb-6 border-b border-black w-full">
+                <div>
+                  <%= form.label :name, "Name on card" %>
+                  <%= form.text_field :name, placeholder: "John Doe"  %>
+                </div>
+                <br>
+                <div>
+                  <%= form.label :card, "Card information" %>
+                  <%= form.text_field :card, placeholder: "xxxx xxxx xxxx xxxx", maxlength: 19  %>
+                </div>
+                <br>
+                <div class="flex items-center space-x-3">
+                  <div class="flex-1">
+                    <%= form.label :expiration, "Expiration" %>
+                    <%= form.text_field :expiration, placeholder: "XX / XX", maxlength: 19  %>
+                  </div>
+                  <div class="w-[100px]">
+                    <%= form.label :cvc, "CVC" %>
+                    <%= form.text_field :cvc, placeholder: "123", maxlength: 4 %>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <%= form.label :email %>
+                <%= form.text_field :email, placeholder: "Your email address", required: true  %>
+              </div>
+              <br>
+              <div>
+                <%= form.label :amount, "Amount $" %>
+                <%= form.number_field :amount  %>
+              </div>
+              <br>
+              <%= render "shared/form_submit_button", form: form, title: "Give tip"  %>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render "powered_by" %>

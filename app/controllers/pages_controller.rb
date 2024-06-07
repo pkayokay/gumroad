@@ -21,6 +21,31 @@ class PagesController < ApplicationController
     @follower = Follower.new
   end
 
+  def tips
+    @user = User.find_by(username: params[:username])
+    redirect_to root_path if @user.nil?
+
+    if @user == current_user
+      flash[alert] =  "You can't tip yourself"
+      redirect_to root_path
+    end
+
+    @tip = Tip.new
+  end
+
+  def give_tip
+    @target_user = User.find_by(username: params[:username])
+    tip_params = params.require(:tip).permit(:email, :amount)
+    @tip = Tip.new(tip_params.merge(target_user: @target_user))
+
+    if @tip.save
+      flash[:notice] = "Tip sent!"
+      redirect_to profile_path(username: @target_user.username)
+    else
+      redirect_to tips_path(username: @target_user.username), alert: @tip.errors.full_messages.join(", ")
+    end
+  end
+
   def subscribe
     follower_params = params.require(:follower).permit(:email)
     @target_user = User.find_by(username: params[:username])
@@ -41,7 +66,10 @@ class PagesController < ApplicationController
   def product_checkout
     @purchase = Purchase.new
 
-    redirect_to root_path if @user == current_user
+    if @user == current_user
+      flash[alert] =  "You can't purchase your own product."
+      redirect_to root_path
+    end
   end
 
   def purchase

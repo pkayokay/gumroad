@@ -14,7 +14,14 @@ class AdminController < ApplicationController
       class_name: o.class.name,
     }}
 
-    @activities = @product_purchases + @followers
+    @tips = current_user.tips.order(created_at: :desc).map {|o| {
+      user: o.user_display_name,
+      amount: o.amount,
+      created_at: o.created_at,
+      class_name: o.class.name,
+    }}
+
+    @activities = @product_purchases + @followers + @tips
     @activities.sort_by! { |activity| activity[:created_at] }.reverse!
   end
 

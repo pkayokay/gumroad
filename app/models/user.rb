@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :product_purchases, through: :products, source: :purchases
   has_many :followers, class_name: 'Follower', foreign_key: 'target_user_id', dependent: :destroy
   has_many :following_users, class_name: 'Follower', foreign_key: 'user_id', dependent: :destroy
+  has_many :tips, class_name: 'Tip', foreign_key: 'target_user_id', dependent: :destroy
+  has_many :creator_tips, class_name: 'Tip', foreign_key: 'user_id', dependent: :destroy
 
   before_validation :autoset_username, on: :create
   before_validation :autoset_avatar_url, on: :create
@@ -41,6 +43,6 @@ class User < ApplicationRecord
   end
 
   def revenue_count
-    products.sum {|p| p.revenue_count }
+    products.sum {|p| p.revenue_count } + tips.sum {|t| t.amount.to_i }
   end
 end

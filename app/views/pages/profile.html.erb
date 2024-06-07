@@ -30,7 +30,7 @@
         <div class="border border-black rounded-md divide-y divide-black">
           <% @products.each do |product| %>
             <%= link_to product_page_path(username: @user.username, product_slug: product.slug), class: "underline flex w-full items-center space-x-2" do %>
-              <img src="<%= product.image_url %>" class="w-[80px]" />
+              <img src="<%= product.image_url %>" class="w-[80px] rounded-ss-[0.3rem] rounded-es-[0.3rem]" />
               <span class="pl-4"><%= product.name %></span>
             <% end %>
           <% end %>

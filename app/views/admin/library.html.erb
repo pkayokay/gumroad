@@ -1,44 +1,67 @@
-<%= render "admin/header", title: "Library" %>
+<header class="min-h-[10rem] px-12 py-10 border-b w-full border-b-black justify-between w-full">
+  <h1 class="text-4xl mt-5">Library</h1>
+  <div class="mt-10 space-x-2">
+    <%= link_to "Purchases", library_path, class: "#{@purchases_tab ? 'bg-white border-black' : 'border-transparent'}  border text-nowrap p-2  hover:border-black rounded-3xl px-4 inline-block duration-100 " %>
+    <%= link_to "Wishlist", library_path(tab: "wishlist"), class: "#{@wishlist_tab ? 'bg-white border-black' : 'border-transparent'}  border text-nowrap p-2  hover:border-black rounded-3xl px-4 inline-block duration-100 " %>
+  </div>
+</header>
 
 <div class="p-12">
-  <% if @purchases.present? %>
-    <div class="">
-      <div class="flow-root">
-        <div class="-my-2 overflow-x-auto">
-          <div class="inline-block min-w-full align-middle">
-            <table class="min-w-full divide-y divide-gray-300">
-              <thead class="">
-                <tr class="">
-                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Product Name</th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Author</th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-200">
-                <% @purchases.each do |purchase| %>
-                <tr>
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900 sm:pl-0">
-                    <%= link_to purchase_library_path(purchase_id: purchase.id), class: "underline" do  %>
-                      <div class="mb-1 font-medium text-base"><%= purchase.product.name %></div>
-                    <% end %>
-                  </td>
-                  <td class="whitespace-nowrap px-3 py-4">
-                    <span class=""><%= purchase.product.user.display_name %></span>
-                  </td>
-                  <td class="whitespace-nowrap px-3 py-4">
-                    <span class="">$<%= number_with_delimiter(purchase.price) %></span>
-                  </td>
-                </tr>
-              <% end %>
-                <!-- More people... -->
-              </tbody>
-            </table>
+  <% if @purchases_tab %>
+    <% if @purchases.present? %>
+      <div class="">
+        <div class="flow-root">
+          <div class="-my-2 overflow-x-auto">
+            <div class="inline-block min-w-full align-middle">
+              <table class="min-w-full divide-y divide-gray-300">
+                <thead class="">
+                  <tr class="">
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Product Name</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Author</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Price</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                  <% @purchases.each do |purchase| %>
+                  <tr>
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm text-gray-900 sm:pl-0">
+                      <%= link_to purchase_library_path(purchase_id: purchase.id), class: "underline" do  %>
+                        <div class="mb-1 font-medium text-base"><%= purchase.product.name %></div>
+                      <% end %>
+                    </td>
+                    <td class="whitespace-nowrap px-3 py-4">
+                      <span class=""><%= purchase.product.user.display_name %></span>
+                    </td>
+                    <td class="whitespace-nowrap px-3 py-4">
+                      <span class="">$<%= number_with_delimiter(purchase.price) %></span>
+                    </td>
+                  </tr>
+                <% end %>
+                  <!-- More people... -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-  <% else %>
-    <p class="text-lg w-full mt-24 text-center px-5">You don't have any products</p>
+    <% else %>
+      <p class="text-lg w-full mt-24 text-center px-5">You don't have any products</p>
+    <% end %>
+  <% elsif @wishlist_tab %>
+    <% if @wishlist_items.present? %>
+      <div class="">
+        <div class="border border-black rounded-md divide-y divide-black">
+          <% @wishlist_items.each do |wishlist_item| %>
+            <%= link_to product_page_path(username: wishlist_item.product.user.username, product_slug: wishlist_item.product.slug), class: "underline flex w-full items-center space-x-2", target: "_blank" do %>
+              <img src="<%= wishlist_item.product.image_url %>" class="w-[80px] rounded-ss-[0.3rem] rounded-es-[0.3rem]" />
+              <div class="pl-4"><%= wishlist_item.product.name %></div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <p class="text-lg w-full mt-24 text-center px-5">You don't have any products in your wishlist.</p>
+    <% end %>
   <% end %>
 </div>

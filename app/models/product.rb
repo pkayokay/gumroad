@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   has_many :purchases, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_one :product_category, dependent: :destroy
+  has_many :wishlist_items, dependent: :destroy
 
   scope :published, -> { where(is_published: true) }
 

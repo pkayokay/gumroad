@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :following_users, class_name: 'Follower', foreign_key: 'user_id', dependent: :destroy
   has_many :tips, class_name: 'Tip', foreign_key: 'target_user_id', dependent: :destroy
   has_many :creator_tips, class_name: 'Tip', foreign_key: 'user_id', dependent: :destroy
+  has_many :wishlist_items
 
   before_validation :autoset_username, on: :create
   before_validation :autoset_avatar_url, on: :create

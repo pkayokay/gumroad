@@ -79,6 +79,9 @@ class PagesController < ApplicationController
     if user_signed_in?
       @follower = @product_user.followers.find_by(email: current_user.email) || Follower.create(user: current_user, email: current_user.email, target_user: @product_user)
       @purchase = Purchase.create(follower: @follower, user: current_user, price: @product.price, product: @product)
+      @wishlist_item = WishlistItem.find_by(user: current_user, product: @product)
+      @wishlist_item.update(is_purchased: true) if @wishlist_item.present?
+
       flash[:notice] = "Purchased!"
       redirect_to purchase_library_path(purchase_id: @purchase.id)
     else
@@ -105,6 +108,25 @@ class PagesController < ApplicationController
           redirect_to product_checkout_path(username: @user.username, product_slug: product.slug)
         end
       end
+    end
+  end
+
+  def add_to_wishlist
+    @product = Product.find(params[:product_id])
+    if @product.present?
+      @wishlist_items = WishlistItem.new(
+        product: @product,
+        user: current_user,
+      )
+      if @wishlist_items.save
+        flash[:notice] = "Added to wishlist!"
+      else
+        flash[:alert] = "Something went wrong, try again."
+      end
+
+      redirect_to product_page_path(username: @product.user.username, product_slug: @product.slug)
+    else
+      redirect_to root_path, alert: "Product not found"
     end
   end
 

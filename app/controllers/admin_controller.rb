@@ -26,7 +26,13 @@ class AdminController < ApplicationController
   end
 
   def library
-    @purchases = current_user.purchases.order(created_at: :desc).includes(:product)
+    @purchases_tab = params[:tab].nil?
+    @wishlist_tab = params[:tab] == "wishlist"
+    if @purchases_tab
+      @purchases = current_user.purchases.order(created_at: :desc).includes(:product)
+    elsif @wishlist_tab
+      @wishlist_items = current_user.wishlist_items.where(is_purchased: false).order(created_at: :desc).includes(:product, :user)
+    end
   end
 
   def emails

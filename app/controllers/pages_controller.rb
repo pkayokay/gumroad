@@ -108,6 +108,25 @@ class PagesController < ApplicationController
     end
   end
 
+  def add_to_wishlist
+    @product = Product.find(params[:product_id])
+    if @product.present?
+      @wishlist_items = WishlistItem.new(
+        product: @product,
+        user: current_user,
+      )
+      if @wishlist_items.save
+        flash[:notice] = "Added to wishlist!"
+      else
+        flash[:alert] = "Something went wrong, try again."
+      end
+
+      redirect_to product_page_path(username: @product.user.username, product_slug: @product.slug)
+    else
+      redirect_to root_path, alert: "Product not found"
+    end
+  end
+
   def set_product
     @user = User.find_by(username: params[:username])
     redirect_to root_path if @user.nil?

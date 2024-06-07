@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root 'pages#index'
 
+  post '/add_to_wishlist/:product_id', to: "pages#add_to_wishlist", as: :add_to_wishlist
   post '/subscribe', to: "pages#subscribe"
   post '/submit_review', to: "purchases#submit_review", as: :reviews
   post '/purchase/:product_id', to: "pages#purchase", as: :purchase

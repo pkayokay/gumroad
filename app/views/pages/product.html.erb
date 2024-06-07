@@ -30,8 +30,15 @@
       <div id="right" class="lg:w-[340px] lg:border-t-0 border-t lg:border-l border-black py-6">
         <div class="px-6 border-b border-black">
           <% if @product.is_published? %>
+              <% if user_signed_in? %>
+                <% if current_user.wishlist_items.exists?(product_id: @product.id) %>
+                <%= link_to "It's on your wishlist", library_path(tab: "wishlist"), class: "text-center text-nowrap border border-black py-4 px-5 w-full mb-5 rounded-md duration-100 hover:shadow-linkButton inline-block hover:-translate-x-1 hover:-translate-y-1" %>
+                <% else %>
+                  <%= button_to "Add to Wishlist", add_to_wishlist_path(product_id: @product.id), method: :post, class: "text-nowrap border border-black py-4 px-5 w-full mb-5 rounded-md duration-100 hover:shadow-linkButton inline-block hover:-translate-x-1 hover:-translate-y-1", form: {class: "" }, data: { turbo: false } %>
+                <% end %>
+              <% end %>
               <% if @user.is_tipping_enabled? %>
-                <div class="mb-7">
+                <div class="mb-5">
                   <%= render "shared/link_button", full_width: true, title: "Support by tipping!", path: tips_path(username: @user.username), variant: "pink" %>
                 </div>
               <% end %>

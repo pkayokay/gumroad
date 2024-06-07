@@ -4,15 +4,20 @@
   </div>
 </header>
 <div class="mt-8 p-10 max-w-7xl mx-auto flex items-start lg:space-y-0 space-y-10 lg:space-x-10 w-full lg:flex-row flex-col">
-  <div class="bg-white border border-black rounded-md w-full max-w-4xl mx-auto">
+  <div class="bg-white border border-black rounded-md w-full lg:max-w-4xl mx-auto">
     <div class="flex md:flex-row flex-col">
       <div id="left" class="flex-1">
         <div class="border-b border-black flex items-center md:flex-row flex-col">
-          <div class="w-full md:w-auto p-6 md:border-b-0 border-black">
-            <div><%= link_to @product.name, product_page_path(username: @user.username, product_slug: @product.slug), class: "mb-2 text-2xl underline font-medium inline-block" %></div>
-            <%= link_to profile_path(@user.username), class: "underline", target: "_blank" do %>
-              <%= @user.display_name %>
-            <% end %>
+          <div class=" w-full md:w-auto md:border-b-0 border-black flex items-center sm:flex-row flex-col">
+            <img src="<%= @product.image_url %>" class="w-full sm:w-[150px] rounded-ss-[0.3rem] rounded-se-[0.3rem] sm:rounded-se-none" />
+            <div class=" py-6 sm:py-0 px-5">
+              <%= link_to @product.name, product_page_path(username: @user.username, product_slug: @product.slug), class: "mb-2 text-2xl underline font-medium inline-block" %>
+              <div>
+                <%= link_to profile_path(@user.username), class: "underline", target: "_blank" do %>
+                  <%= @user.display_name %>
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
         <div class="py-7 px-6 flex items-center justify-between ">

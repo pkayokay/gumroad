@@ -17,7 +17,7 @@
           <% elsif activity[:class_name] == "Follower" %>
             <div><%= activity[:user] %></span> <span class="font-semibold">subscribed</span> <%= time_ago_in_words(activity[:created_at]) %> ago.</div>
           <% elsif activity[:class_name] == "Tip" %>
-            <div><%= activity[:user] %></span> <span class="font-semibold">tipped $<%= activity[:amount] %></span> <%= time_ago_in_words(activity[:created_at]) %> ago.</div>
+            <div><%= activity[:user] %></span> <span class="font-semibold">tipped $<%= number_with_delimiter(activity[:amount]) %></span> <%= time_ago_in_words(activity[:created_at]) %> ago.</div>
           <% end %>
         <% end %>
       </div>

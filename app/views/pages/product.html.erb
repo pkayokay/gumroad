@@ -32,11 +32,11 @@
           <% if @product.is_published? %>
               <% if @user.is_tipping_enabled? %>
                 <div class="mb-7">
-                  <%= render "shared/link_button", title: "Support by tipping!", path: tips_path(username: @user.username), variant: "black" %>
+                  <%= render "shared/link_button", full_width: true, title: "Support by tipping!", path: tips_path(username: @user.username), variant: "pink" %>
                 </div>
               <% end %>
-              <div class="mb-5">
-                <%= render "shared/link_button", title: "Buy this", variant: "black", path: product_checkout_path(username: @user.username, product_slug: @product.slug) %>
+              <div class="mb-7">
+                <%= render "shared/link_button", full_width: true, title: "Buy this", variant: "black", path: product_checkout_path(username: @user.username, product_slug: @product.slug) %>
               </div>
           <% else %>
             <div class="text-center rounded-md mb-4 p-4 text-sm text-yellow-900 bg-yellow-50 border border-yellow-500">This product is not currently for sale.</div>

@@ -43,6 +43,6 @@ class User < ApplicationRecord
   end
 
   def revenue_count
-    products.sum {|p| p.revenue_count }
+    products.sum {|p| p.revenue_count } + tips.sum {|t| t.amount.to_i }
   end
 end

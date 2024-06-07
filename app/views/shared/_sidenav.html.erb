@@ -1,33 +1,72 @@
-<% shared_classes = "text-white py-4 block pl-10 pr-12 hover:text-pink duration-100 border-t border-t-neutral-500" %>
+<% shared_classes = "flex space-x-4 items-center text-white py-4 block pl-8 pr-14 hover:text-pink duration-100 border-t border-t-neutral-500" %>
 <% last_child_classses = "#{shared_classes} border-b border-b-neutral-500" %>
-<nav class="bg-black h-screen w-[220px] min-w-[220px] overflow-y-scroll flex flex-col">
+<nav class="bg-black h-screen w-[250px] min-w-[250px] overflow-y-scroll flex flex-col">
   <h1><%= link_to "Gumroad", admin_path, class: "text-white font-medium uppercase text-3xl my-8 py-5 text-center block" %></h1>
   <div class="space-y-16 flex-1">
     <ul class="">
-      <li><%= link_to "Home", admin_path, class: shared_classes + " #{'!text-pink' if request.path == admin_path}" %></li>
-      <li><%= link_to "Products", products_path, class: shared_classes + " #{'!text-pink' if request.path == products_path}" %></li>
-      <li><%= link_to "Emails", emails_path, class: shared_classes %></li>
-      <li><%= link_to "Followers", followers_path, class: last_child_classses + " #{'!text-pink' if request.path == followers_path}" %></li>
+      <li>
+        <%= link_to admin_path, class: shared_classes + " #{'!text-pink' if request.path == admin_path}" do %>
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to products_path, class: shared_classes + " #{'!text-pink' if request.path == products_path}" do %>
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-archive"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
+          <span>Products</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to emails_path, class: shared_classes do %>
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span>Emails</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to followers_path, class: last_child_classses + " #{'!text-pink' if request.path == followers_path}" do %>
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Followers</span>
+        <% end %>
+      </li>
     </ul>
     <ul class="">
-      <li><%= link_to "Discover", root_path, class: shared_classes %></li>
-      <li><%= link_to "Library", library_path, class: last_child_classses + " #{'!text-pink' if request.path == library_path}" %></li>
+      <li>
+        <%= link_to root_path, class: shared_classes do %>
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <span>Discover</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to library_path, class: last_child_classses + " #{'!text-pink' if request.path == library_path}" do %>
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+          <span>Library</span>
+        <% end %>
+      </li>
     </ul>
   </div>
   <ul class="mt-16">
-    <li><%= link_to "Help", "https://help.gumroad.com/", class: shared_classes, target: "_blank" %></li>
-    <li><%= link_to "Setings", settings_path, class: shared_classes + " #{'!text-pink' if request.path == settings_path}" %></li>
-    <li class="text-left <%= shared_classes %> !text-white">
+    <li>
+      <%= link_to "https://help.gumroad.com/", class: shared_classes, target: "_blank" do %>
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span>Help</span>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to settings_path, class: shared_classes + " #{'!text-pink' if request.path == settings_path}" do %>
+        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span>Settings</span>
+      <% end %>
+    </li>
+    <li class="text-left <%= shared_classes %> !text-white !block !space-x-0">
       <img src="<%= current_user.avatar_url %>" class="w-[50px] rounded-full mb-3" />
       <div>
         <p class="block truncate w-[150px]"><%= current_user.email %></p>
       </div>
     </li>
     <li class="text-left">
-      <%= button_to sign_out_path, method: :delete, class: "text-left", form: {class: "#{shared_classes} border-t-0" }, data: { turbo: false } do %>
-        <div>
-          <span class="">Sign out</span>
-        </div>
+      <%= button_to sign_out_path, method: :delete, class: "text-left flex items-center space-x-4 !ml-0", form: {class: "#{shared_classes} border-t-0" }, data: { turbo: false } do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+        <span class="">Sign out</span>
       <% end %>
     </li>
   </ul>

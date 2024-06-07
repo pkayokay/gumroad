@@ -79,6 +79,9 @@ class PagesController < ApplicationController
     if user_signed_in?
       @follower = @product_user.followers.find_by(email: current_user.email) || Follower.create(user: current_user, email: current_user.email, target_user: @product_user)
       @purchase = Purchase.create(follower: @follower, user: current_user, price: @product.price, product: @product)
+      @wishlist_item = WishlistItem.find_by(user: current_user, product: @product)
+      @wishlist_item.update(is_purchased: true) if @wishlist_item.present?
+
       flash[:notice] = "Purchased!"
       redirect_to purchase_library_path(purchase_id: @purchase.id)
     else

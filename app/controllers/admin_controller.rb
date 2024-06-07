@@ -31,7 +31,7 @@ class AdminController < ApplicationController
     if @purchases_tab
       @purchases = current_user.purchases.order(created_at: :desc).includes(:product)
     elsif @wishlist_tab
-      @wishlist_items = current_user.wishlist_items.order(created_at: :desc).includes(:product, :user)
+      @wishlist_items = current_user.wishlist_items.where(is_purchased: false).order(created_at: :desc).includes(:product, :user)
     end
   end
 

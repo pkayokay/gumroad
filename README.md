@@ -18,6 +18,8 @@ A clone of Gumroad.com with basic features.
   - Public profile page displays products, posts and a way to subscribe as a follower.
 - Tips
   - Any user can give a one time tip to a creator.
+- Wishlist items
+  - Users can add products as wishlist items, and browse their wishlist on the library page wishlist tab.
 
 ## Teck Stack
 

@@ -42,7 +42,7 @@ class PagesController < ApplicationController
       flash[:notice] = "Tip sent!"
       redirect_to profile_path(username: @target_user.username)
     else
-      render :tip, status: :unprocessable_entity
+      redirect_to tips_path(username: @target_user.username), alert: @tip.errors.full_messages.join(", ")
     end
   end
 

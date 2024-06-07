@@ -51,9 +51,14 @@
   <% elsif @wishlist_tab %>
     <% if @wishlist_items.present? %>
       <div class="">
-        <%= @wishlist_items.each do |wishlist_item| %>
-          <%= wishlist_item.product.name %>
-        <% end %>
+        <div class="border border-black rounded-md divide-y divide-black">
+          <% @wishlist_items.each do |wishlist_item| %>
+            <%= link_to product_page_path(username: wishlist_item.product.user.username, product_slug: wishlist_item.product.slug), class: "underline flex w-full items-center space-x-2", target: "_blank" do %>
+              <img src="<%= wishlist_item.product.image_url %>" class="w-[80px] rounded-ss-[0.3rem] rounded-es-[0.3rem]" />
+              <div class="pl-4"><%= wishlist_item.product.name %></div>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     <% else %>
       <p class="text-lg w-full mt-24 text-center px-5">You don't have any products in your wishlist.</p>

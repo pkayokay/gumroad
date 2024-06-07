@@ -29,6 +29,21 @@ class PagesController < ApplicationController
       flash[alert] =  "You can't tip yourself"
       redirect_to root_path
     end
+
+    @tip = Tip.new
+  end
+
+  def give_tip
+    @target_user = User.find_by(username: params[:username])
+    tip_params = params.require(:tip).permit(:email, :amount)
+    @tip = Tip.new(tip_params.merge(target_user: @target_user))
+
+    if @tip.save
+      flash[:notice] = "Tip sent!"
+      redirect_to profile_path(username: @target_user.username)
+    else
+      render :tip, status: :unprocessable_entity
+    end
   end
 
   def subscribe
